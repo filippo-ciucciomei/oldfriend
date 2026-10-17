@@ -258,42 +258,55 @@ body {
 .menu-link:hover { color: #8a1c1c; }
 
 /* --- UI Locks & Icons --- */
-/* Locks the background from scrolling when the modal is open */
 body.modal-open {
     overflow: hidden;
 }
 
-/* The punk-red plus sign to indicate clickability */
+/* The punk-red plus sign */
 .plus-icon {
     font-family: sans-serif;
     font-weight: 300;
-    font-size: 1.5rem;
+    font-size: 1.1rem;
     color: #8a1c1c; 
+    margin-left: 6px; /* Puts the + right next to the text */
     transition: transform 0.2s ease;
 }
 
 /* --- Menu List Typography --- */
-/* Unifies "Alla Carta" and "Degustazione" top-level headers */
+/* Unifies "Alla Carta" and "Degustazione" */
 .menu-category-title {
     font-family: 'Bodoni Moda', serif;
-    font-size: 1.5rem;
+    font-size: 1.2rem; /* Returned to original size (smaller than Menu) */
+    font-weight: normal; /* Removed bold */
     margin-top: 30px;
     margin-bottom: 15px;
     border-bottom: 1px solid #333;
     padding-bottom: 5px;
     color: #1a1a1a;
-    font-weight: bold;
 }
 
-/* Individual Menus (A Sud di nessun Nord, etc.) - Thinner and slightly smaller */
+/* Individual Menus (A Sud di nessun Nord, etc.) */
+.menu-link {
+    cursor: pointer;
+    margin-bottom: 15px;
+    /* Removed the padding-left so everything aligns perfectly with the border */
+}
+.menu-link:hover { color: #8a1c1c; }
+
 .menu-link-header {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
     font-family: 'Bodoni Moda', serif;
-    font-weight: normal; /* Makes it thinner */
-    font-size: 1.3rem; /* Sits exactly between the 1.5rem category and 0.85rem description */
+    font-weight: normal; 
+    font-size: 1.05rem; /* Smaller than Alla Carta/Degustazione */
     color: #1a1a1a;
+}
+
+.menu-link-price {
+    font-weight: bold; 
+    font-family: sans-serif; 
+    font-size: 1.05rem;
 }
 
 .menu-link-desc {
@@ -301,6 +314,7 @@ body.modal-open {
     font-size: 0.85rem;
     color: #555;
 }
+
 
 /* Inside the Modal Styles */
 .modal-title {

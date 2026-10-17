@@ -137,24 +137,18 @@ if (menuContainer) {
                 if (visibile.toUpperCase() !== 'TRUE') continue;
 
                 if (tipo === 'Alla Carta') {
-                    // Alla Carta is both a category AND clickable, so we merge the styles and add a +
+                    // Alla Carta acts as both a category header and a clickable link
                     allaCartaHtml += `
-                        <div class="menu-link" onclick="openMenuModal('${tab}', 'Alla Carta', '')">
-                            <div class="menu-category-title" style="display:flex; justify-content:space-between; align-items:baseline; cursor:pointer;">
-                                <span>Alla Carta</span>
-                                <span class="plus-icon">+</span>
-                            </div>
+                        <div class="menu-category-title" onclick="openMenuModal('${tab}', 'Alla Carta', '')" style="cursor:pointer;">
+                            <span>Alla Carta <span class="plus-icon">+</span></span>
                         </div>`;
                 } else if (tipo === 'Degustazione') {
-                    // Menus under Degustazione get the thinner font and a +
+                    // Tasting menus
                     degustazioneHtml += `
                         <div class="menu-link" onclick="openMenuModal('${tab}', '${nome}', '${costo}')">
                             <div class="menu-link-header">
-                                <span>${nome}</span>
-                                <div>
-                                    <span style="margin-right: 15px; font-weight: bold; font-family: sans-serif; font-size: 1.1rem;">${costo ? '€' + costo : ''}</span>
-                                    <span class="plus-icon">+</span>
-                                </div>
+                                <span>${nome} <span class="plus-icon">+</span></span>
+                                <span class="menu-link-price">${costo ? '€' + costo : ''}</span>
                             </div>
                             <p class="menu-link-desc">${desc}</p>
                         </div>`;
