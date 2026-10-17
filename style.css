@@ -4,8 +4,13 @@
 /* Basic reset to remove default margins */
 body {
     margin: 0;
-    padding: 0;
+    padding-top: 0;
     font-family: sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #f4f1eb; 
+    color: #1a1a1a;
 }
 
 /* Make the header fixed at the top and centered */
@@ -14,17 +19,17 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    background-color: #ffffff; 
-    text-align: center;
+    background-color: #f4f1eb; 
+    color: #1a1a1a;    text-align: center;
     padding: 15px 0;
     z-index: 1000;
     border-bottom: 1px solid #333;
 }
 
-/* Push the menu down so it isn't hidden behind the fixed header */
 .menu-container {
-    margin-top: 100px; 
+    margin-top: 120px; 
     padding: 0 20px;
+    flex: 1; 
 }
 
 /* Styling for each menu row */
@@ -64,7 +69,12 @@ body {
 /* Make the font cursive on hover (desktop) AND when tapped/active (mobile) */
 .menu-title:hover,
 .menu-title.active {
+    /* font-style: italic; */
+    /* font-family: 'Bodoni Moda', serif; */
     font-style: italic;
+    /* font-size: 2rem;  */
+    color: #8a1c1c; /* Deep oxblood red */
+    transition: all 0.2s ease-in-out;
 }
 
 /* Hide the inner content by default */
@@ -87,11 +97,12 @@ body {
 /* Fixed Footer */
 .site-footer {
     /* position: fixed; */
-   background-color: white;
+    background-color: #f4f1eb; 
+    color: #1a1a1a;
     display: flex;
     justify-content: space-between; 
     align-items: center;
-    padding: 15px 20px;
+    padding: 25px 20px;
     box-sizing: border-box;
 }
 
@@ -113,4 +124,52 @@ body {
 /* Ensure the last menu item isn't hidden behind the fixed footer */
 .menu-container {
     margin-bottom: 30px; 
+}
+
+
+/* Michelin Guide Badge - Image */
+.michelin-badge {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.michelin-img {
+    height: 18px; /* Keeps the logo small and elegant */
+    width: auto;
+    opacity: 0.9; /* Slight fade so it doesn't overpower the main logo */
+}
+
+
+/* Booking Image and Text Overlay */
+.booking-image-container {
+    position: relative;
+    max-width: 70%;
+    margin: 20px auto; /* Centers the image container on the screen */
+}
+
+.booking-img {
+    width: 100%;
+    display: block;
+    height: auto;
+}
+
+/* Link wrapper to remove default blue text/underline */
+.booking-link {
+    text-decoration: none;
+    display: block;
+}
+
+/* Updated Booking Text Overlay - Massive Font */
+.booking-overlay {
+    position: absolute;
+    top: 5%; /* Changed to percentage so it scales with the image */
+    right: 3%;
+    color: rgb(230, 230, 230);
+    font-weight: 400;
+    font-family: sans-serif; 
+    text-align: right;
+    line-height: 1.2; /* Pulls the two massive lines closer together */
+    font-size: 8vw; /* Makes the text huge and scales dynamically with the screen */
+    letter-spacing: 5px; /* Adjust this number to add more or less space */
 }

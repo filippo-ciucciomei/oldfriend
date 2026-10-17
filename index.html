@@ -14,8 +14,7 @@
         
        <!-- Michelin Badge -->
         <div class="michelin-badge">
-            <span class="michelin-title">MICHELIN</span> 
-            <span class="michelin-subtitle">Guide 2026</span>
+            <img src="media/logos/michelin2026.png" alt="Michelin Guide 2026" class="michelin-img">
         </div>
     </header>
 
@@ -25,14 +24,21 @@
         <section class="menu-section">
             <h2 class="menu-title">Booking</h2>
             <div class="menu-content">
-                <p>Booking details will go here.</p>
+                <!-- Wrap the container in an anchor (link) tag -->
+                <a href="https://oldfriend.superbexperience.com/reserve/experience" target="_blank" class="booking-link">
+                    <div class="booking-image-container">
+                        <img src="media/photos/image 05.jpeg" alt="Booking" class="booking-img">
+                        <div class="booking-overlay">BOOK A<br>TABLE</div>
+                    </div>
+                </a>
             </div>
         </section>
 
-        <section class="menu-section">
+         <section class="menu-section">
             <h2 class="menu-title">Menu</h2>
             <div class="menu-content">
-                <p>Sample menu items will go here.</p>
+                <!-- JavaScript will inject the Google Sheet data right here -->
+                <div id="dynamic-menu-container">Loading today's menu...</div>
             </div>
         </section>
 
