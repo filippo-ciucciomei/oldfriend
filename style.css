@@ -10,6 +10,8 @@ body {
     min-height: 100vh; /* Fallback for older screens */
     min-height: 100dvh; /* The mobile fix */
     background-color: transparent; /* Keep this as #f4f1eb for style.css */
+    background-color: #f4f1eb; 
+
     color: #1a1a1a;
 }
 
