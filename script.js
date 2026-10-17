@@ -126,8 +126,7 @@ if (menuContainer) {
         .then(res => res.text())
         .then(csvText => {
             const rows = parseCSV(csvText);
-            let html = '';
-            let hasAllaCarta = false;
+            let allaCartaHtml = '';
             let degustazioneHtml = '';
 
             // Loop through settings (skipping header)
@@ -135,38 +134,49 @@ if (menuContainer) {
                 if (rows[i].length < 6) continue;
                 const [tipo, tab, nome, desc, costo, visibile] = rows[i];
                 
-                if (visibile.toUpperCase() !== 'TRUE') continue; // Only show visible items
+                if (visibile.toUpperCase() !== 'TRUE') continue;
 
                 if (tipo === 'Alla Carta') {
-                    hasAllaCarta = true;
-                    html += `<div class="menu-link" onclick="openMenuModal('${tab}', 'Alla Carta', '')">
-                                <div class="menu-link-header">Alla Carta</div>
-                             </div>`;
+                    // Alla Carta is both a category AND clickable, so we merge the styles and add a +
+                    allaCartaHtml += `
+                        <div class="menu-link" onclick="openMenuModal('${tab}', 'Alla Carta', '')">
+                            <div class="menu-category-title" style="display:flex; justify-content:space-between; align-items:baseline; cursor:pointer;">
+                                <span>Alla Carta</span>
+                                <span class="plus-icon">+</span>
+                            </div>
+                        </div>`;
                 } else if (tipo === 'Degustazione') {
+                    // Menus under Degustazione get the thinner font and a +
                     degustazioneHtml += `
                         <div class="menu-link" onclick="openMenuModal('${tab}', '${nome}', '${costo}')">
                             <div class="menu-link-header">
-                                <span>- ${nome}</span>
-                                <span>${costo ? '€' + costo : ''}</span>
+                                <span>${nome}</span>
+                                <div>
+                                    <span style="margin-right: 15px; font-weight: bold; font-family: sans-serif; font-size: 1.1rem;">${costo ? '€' + costo : ''}</span>
+                                    <span class="plus-icon">+</span>
+                                </div>
                             </div>
-                            <p class="menu-link-desc">&nbsp;&nbsp;${desc}</p>
+                            <p class="menu-link-desc">${desc}</p>
                         </div>`;
                 }
             }
 
-            if (degustazioneHtml) {
-                html += `<h3 class="menu-category-title">Degustazione</h3>` + degustazioneHtml;
-            }
-            menuContainer.innerHTML = html;
+            let finalHtml = '';
+            if (allaCartaHtml) finalHtml += allaCartaHtml;
+            if (degustazioneHtml) finalHtml += `<div class="menu-category-title">Degustazione</div>` + degustazioneHtml;
+            
+            menuContainer.innerHTML = finalHtml;
         });
 }
 
 // Open Modal and Fetch specific Menu + Allergens
 window.openMenuModal = function(tabName, menuTitle, menuPrice) {
+    // Lock the background scrolling
+    document.body.classList.add('modal-open');
+    
     modalContent.innerHTML = "Caricamento in corso...";
     modal.classList.add('active');
 
-    // Fetch the specific menu tab AND the allergen tab at the same time
     Promise.all([
         fetch(baseCSVUrl + sheetGIDs[tabName]).then(res => res.text()),
         fetch(baseCSVUrl + sheetGIDs['ALLERGENI']).then(res => res.text())
@@ -174,22 +184,19 @@ window.openMenuModal = function(tabName, menuTitle, menuPrice) {
         const menuRows = parseCSV(menuCsv);
         const allergenRows = parseCSV(allergenCsv);
 
-        // Build Allergen Footer
         let allergenHtml = '<div class="allergen-footer"><strong>Allergeni:</strong><br>';
         for(let i=0; i<allergenRows.length; i++) {
             if(allergenRows[i][0]) allergenHtml += allergenRows[i][0] + ' &nbsp;&nbsp; ';
         }
         allergenHtml += '</div>';
 
-        // Build Modal HTML
         let html = `<h2 class="modal-title">${menuTitle}</h2>`;
         if(menuPrice) html += `<div class="modal-subtitle">${menuPrice} € per persona</div>`;
 
         if (tabName === 'Alla Carta') {
-            // Render Alla Carta (Dish on left, Price on right)
             for(let i=1; i<menuRows.length; i++) {
                 const dish = menuRows[i][0];
-                const price = menuRows[i][2] || menuRows[i][1]; // Check col B or C for price
+                const price = menuRows[i][2] || menuRows[i][1]; 
                 if(dish && price) {
                     html += `<div class="dish-item-alla-carta">
                                 <span>${formatAllergens(dish)}</span>
@@ -198,27 +205,31 @@ window.openMenuModal = function(tabName, menuTitle, menuPrice) {
                 }
             }
         } else {
-            // Render Degustazione (Opzione 1 and Opzione 2)
             let op1Html = '';
             let op2Html = '';
-            
             for(let i=1; i<menuRows.length; i++) {
                 const op1 = menuRows[i][0];
                 const op2 = menuRows[i][1];
                 if(op1) op1Html += `<div class="dish-item">${formatAllergens(op1)}</div>`;
                 if(op2) op2Html += `<div class="dish-item">${formatAllergens(op2)}</div>`;
             }
-
             html += op1Html;
             if(op2Html) {
                 html += `<div class="oppure">- oppure -</div>`;
                 html += op2Html;
             }
         }
-
         modalContent.innerHTML = html + allergenHtml;
     }).catch(err => {
         modalContent.innerHTML = "Errore durante il caricamento del menu.";
         console.error(err);
     });
 };
+
+// Close modal and unlock background scrolling
+if(modalClose) {
+    modalClose.addEventListener('click', () => {
+        modal.classList.remove('active');
+        document.body.classList.remove('modal-open');
+    });
+}
