@@ -144,7 +144,7 @@ body {
 /* Booking Image and Text Overlay */
 .booking-image-container {
     position: relative;
-    max-width: 70%;
+    max-width: 90%;
     margin: 20px auto; /* Centers the image container on the screen */
 }
 
@@ -163,7 +163,7 @@ body {
 /* Updated Booking Text Overlay - Massive Font */
 .booking-overlay {
     position: absolute;
-    top: 5%; /* Changed to percentage so it scales with the image */
+    top: 3%; /* Changed to percentage so it scales with the image */
     right: 3%;
     color: rgb(230, 230, 230);
     font-weight: 400;
