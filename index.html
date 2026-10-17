@@ -34,13 +34,24 @@
             </div>
         </section>
 
-         <section class="menu-section">
+         <!-- MENU SECTION BELOW -->
+         <!-- Updated Menu Section -->
+        <section class="menu-section">
             <h2 class="menu-title">Menu</h2>
             <div class="menu-content">
-                <!-- JavaScript will inject the Google Sheet data right here -->
-                <div id="dynamic-menu-container">Loading today's menu...</div>
+                <div id="dynamic-menu-container">Loading today's menus...</div>
             </div>
         </section>
+
+    <!-- Menu Modal (Hidden by default) -->
+    <div id="menu-modal" class="menu-modal">
+        <div class="modal-close" id="modal-close">&times;</div>
+        <div class="modal-content" id="modal-content">
+            <!-- JavaScript will inject the specific menu and allergens here -->
+        </div>
+    </div>
+
+    <!-- MENU SECTION ABOVE -->
 
         <section class="menu-section">
             <h2 class="menu-title">Images</h2>
@@ -53,7 +64,7 @@
                 </div>
             </div>
         </section>
-        
+
 
         <section class="menu-section">
             <h2 class="menu-title">Who we are</h2>
