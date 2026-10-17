@@ -30,19 +30,40 @@ body {
 /* Styling for each menu row */
 .menu-section {
     border-bottom: 1px solid #333;
+    padding: 5px 0;
 }
+
+.menu-last-section {
+    border-bottom: 1px solid #333;
+    padding-top: 5px;
+    padding-bottom: 0;
+}
+
+/* The clickable menu titles */
+/* .menu-title {
+    cursor: pointer;
+    padding: 10px 0;
+    margin: 20px 0px;
+    font-weight: 400;
+} */
+
+/* Make the font cursive on hover */
+/* .menu-title:hover {
+    font-style: italic;
+} */
 
 /* The clickable menu titles */
 .menu-title {
     cursor: pointer;
     padding: 20px 0;
     margin: 0;
-    font-weight: 400;
+    font-weight: normal;
+    -webkit-tap-highlight-color: transparent; /* This removes the blue highlight on mobile */
 }
 
-/* Make the font cursive on hover */
-.menu-title:hover {
-    /* font-family: "Brush Script MT", cursive; */
+/* Make the font cursive on hover (desktop) AND when tapped/active (mobile) */
+.menu-title:hover,
+.menu-title.active {
     font-style: italic;
 }
 
@@ -55,7 +76,7 @@ body {
 /* Style for the Old Friend header text */
 .logo {
     font-family: 'Bodoni Moda', serif;
-    font-weight: 400;
+    font-weight: 600;
     font-size: 2.5rem; 
     text-transform: uppercase;
     letter-spacing: 4px; /* This spaces the letters out nicely like in your image */
@@ -63,3 +84,33 @@ body {
     color: #1c1c1c; /* Adding a slightly muted grayish-purple tone similar to the image */
 }
 
+/* Fixed Footer */
+.site-footer {
+    /* position: fixed; */
+   background-color: white;
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    padding: 15px 20px;
+    box-sizing: border-box;
+}
+
+.address {
+    font-size: 0.8rem;
+    color: #333;
+}
+
+.ig-link {
+    color: #333;
+    display: flex;
+    align-items: center;
+}
+
+.ig-link:hover {
+    color: #8b8386;
+}
+
+/* Ensure the last menu item isn't hidden behind the fixed footer */
+.menu-container {
+    margin-bottom: 30px; 
+}

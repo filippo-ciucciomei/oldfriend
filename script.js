@@ -7,6 +7,9 @@ menuTitles.forEach(title => {
         // Find the content div immediately following the clicked title
         const content = title.nextElementSibling;
         
+        // Toggle the 'active' class on the title to change the font
+        title.classList.toggle('active');
+        
         // Toggle its display between 'block' (visible) and 'none' (hidden)
         if (content.style.display === "block") {
             content.style.display = "none";
