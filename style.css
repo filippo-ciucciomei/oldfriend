@@ -354,7 +354,7 @@ body.modal-open {
 
 /* Add this new block to push the first item down */
 .dish-item-alla-carta:first-of-type {
-    margin-top: 50px; 
+    margin-top: 30px; 
 }
 
 .oppure {
