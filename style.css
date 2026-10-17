@@ -144,7 +144,7 @@ body {
 /* Booking Image and Text Overlay */
 .booking-image-container {
     position: relative;
-    max-width: 90%;
+    max-width: 100%;
     margin: 20px auto; /* Centers the image container on the screen */
 }
 
@@ -172,4 +172,42 @@ body {
     line-height: 1.2; /* Pulls the two massive lines closer together */
     font-size: 8vw; /* Makes the text huge and scales dynamically with the screen */
     letter-spacing: 5px; /* Adjust this number to add more or less space */
+}
+
+
+/* Image Carousel */
+.carousel-container {
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap; /* Forces all images onto a single line */
+    line-height: 0; /* Removes any default spacing below images */
+    cursor: pointer;
+    margin: 10px 0;
+}
+
+.carousel-track {
+    display: inline-block;
+    /* 40s is the speed of the scroll. Lower is faster. */
+    animation: scrollLeft 170s linear infinite; 
+}
+
+/* This class will be added by JS to pause the animation */
+.carousel-track.paused {
+    animation-play-state: paused;
+}
+
+.carousel-track img {
+    height: 45vh; /* Exactly 35% of the phone screen height */
+    width: auto;
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    vertical-align: top;
+    /* No spaces or margins between images as requested */
+}
+
+/* Shifts the track exactly 50% to create a seamless infinite loop */
+@keyframes scrollLeft {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); } 
 }
