@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400&display=swap');
-
+/* @import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap');
 
 body {
     margin: 0;
@@ -87,8 +87,8 @@ body {
 
 /* Style for the Old Friend header text */
 .logo {
-    font-family: 'Bodoni Moda', serif;
-    font-weight: 600;
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
     font-size: 2.5rem; 
     text-transform: uppercase;
     letter-spacing: 4px; /* This spaces the letters out nicely like in your image */
@@ -281,7 +281,7 @@ body.modal-open {
 /* --- Menu List Typography --- */
 /* Unifies "Alla Carta" and "Degustazione" */
 .menu-category-title {
-    font-family: 'Bodoni Moda', serif;
+    font-family: 'Playfair Display', serif;
     font-size: 1.2rem; /* Returned to original size (smaller than Menu) */
     font-weight: normal; /* Removed bold */
     margin-top: 30px;
@@ -303,7 +303,7 @@ body.modal-open {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    font-family: 'Bodoni Moda', serif;
+    font-family: 'Playfair Display', serif;
     font-weight: normal; 
     font-size: 0.85rem; /* Smaller than Alla Carta/Degustazione */
     color: #1a1a1a;
@@ -324,7 +324,7 @@ body.modal-open {
 
 /* Inside the Modal Styles */
 .modal-title {
-    font-family: 'Bodoni Moda', serif;
+    font-family: 'Playfair Display', serif;
     font-size: 2rem;
     text-align: center;
     text-transform: uppercase;
