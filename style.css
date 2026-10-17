@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400&display=swap');
+
+
+/* Basic reset to remove default margins */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+/* Make the header fixed at the top and centered */
+.site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    /* background-color: #e9e7e7; A temporary light background so it doesn't overlap transparently */
+    text-align: center;
+    padding: 15px 0;
+    z-index: 1000;
+    border-bottom: 1px solid #333;
+}
+
+/* Push the menu down so it isn't hidden behind the fixed header */
+.menu-container {
+    margin-top: 100px; 
+    padding: 0 20px;
+}
+
+/* Styling for each menu row */
+.menu-section {
+    border-bottom: 1px solid #333;
+}
+
+/* The clickable menu titles */
+.menu-title {
+    cursor: pointer;
+    padding: 20px 0;
+    margin: 0;
+    font-weight: 400;
+}
+
+/* Make the font cursive on hover */
+.menu-title:hover {
+    /* font-family: "Brush Script MT", cursive; */
+    font-style: italic;
+}
+
+/* Hide the inner content by default */
+.menu-content {
+    display: none;
+    padding-bottom: 20px;
+}
+
+/* Style for the Old Friend header text */
+.logo {
+    font-family: 'Bodoni Moda', serif;
+    font-weight: 400;
+    font-size: 2.5rem; 
+    text-transform: uppercase;
+    letter-spacing: 4px; /* This spaces the letters out nicely like in your image */
+    margin: 0;
+    color: #1c1c1c; /* Adding a slightly muted grayish-purple tone similar to the image */
+}
+
