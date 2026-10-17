@@ -245,6 +245,10 @@ body {
 .modal-content {
     max-width: 600px; 
     margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    /* 100vh minus the 60px top and 40px bottom padding of the modal */
+    min-height: calc(100vh - 100px); 
 }
 
 
@@ -299,12 +303,12 @@ body.modal-open {
     align-items: baseline;
     font-family: 'Bodoni Moda', serif;
     font-weight: normal; 
-    font-size: 1.05rem; /* Smaller than Alla Carta/Degustazione */
+    font-size: 0.85rem; /* Smaller than Alla Carta/Degustazione */
     color: #1a1a1a;
 }
 
 .menu-link-price {
-    font-weight: bold; 
+    /* font-weight: bold;  */
     font-family: sans-serif; 
     font-size: 1.05rem;
 }
@@ -360,8 +364,8 @@ body.modal-open {
 }
 
 .allergen-footer {
-    margin-top: 50px;
-    padding-top: 20px;
+    margin-top: auto; /* This automatically pushes the footer to the bottom of the available space */
+    padding-top: 30px;
     border-top: 1px solid #ccc;
     font-size: 0.75rem;
     color: #555;
