@@ -218,12 +218,14 @@ body {
 .menu-modal {
     display: none; 
     position: fixed;
-    top: 0; 
-    left: 0; 
-    width: 100vw; 
-    height: 100vh; /* Fallback */
-    height: 100dvh; /* The mobile fix */
-    background-color: rgba(244, 241, 235, 1); 
+    top: 2.5%; 
+    left: 2.5%; 
+    width: 95vw; 
+    height: 95vh; /* Fallback */
+    height: 95dvh; /* The mobile fix */
+    background-color: rgb(240, 232, 232); 
+    border-color: #6d6c6c;
+    border: 1px solid;
     z-index: 2000;
     overflow-y: auto;
     padding: 60px 20px 40px 20px;
@@ -289,6 +291,12 @@ body.modal-open {
     border-bottom: 1px solid #333;
     padding-bottom: 5px;
     color: #1a1a1a;
+}
+
+/* Controls the font weight of the Alla Carta prices */
+.dish-item-alla-carta strong {
+    font-weight: normal; /* You can change this to 300, 400, or 'lighter' if needed */
+    font-family: 'Playfair Display', serif; 
 }
 
 /* Individual Menus (A Sud di nessun Nord, etc.) */
