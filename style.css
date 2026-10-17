@@ -352,6 +352,11 @@ body.modal-open {
     font-size: 1.1rem;
 }
 
+/* Add this new block to push the first item down */
+.dish-item-alla-carta:first-of-type {
+    margin-top: 50px; 
+}
+
 .oppure {
     text-align: center;
     font-style: italic;
