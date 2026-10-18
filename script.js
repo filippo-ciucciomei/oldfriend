@@ -1,26 +1,11 @@
-// Select all the menu titles
+// --- Accordion Logic ---
 const menuTitles = document.querySelectorAll('.menu-title');
 
-// Add a click event to each title
 menuTitles.forEach(title => {
     title.addEventListener('click', () => {
-        // Find the content div immediately following the clicked title
-        const content = title.nextElementSibling;
-        
-        // Toggle the 'active' class on the title to change the font
         title.classList.toggle('active');
-        
-        // Toggle its display between 'block' (visible) and 'none' (hidden)
-        if (content.style.display === "block") {
-            content.style.display = "none";
-        } else {
-            content.style.display = "block";
-        }
     });
 });
-
-
-
 
 // --- Image Carousel Logic ---
 const carouselTrack = document.getElementById('carousel-track');
@@ -29,23 +14,18 @@ const carouselContainer = document.getElementById('image-carousel');
 if (carouselTrack && carouselContainer) {
     let imageHTML = '';
     
-    // Generate image tags from 01 to 20
+    // Generate image tags from 01 to 20 (skipping 05 as it's used elsewhere)
     for (let i = 1; i <= 20; i++) {
-        if (i === 5) continue; // Skip image 06 (the booking image)
+        if (i === 5) continue;
         
-        // Ensure numbers 1-9 have a leading zero (e.g., '01', '02')
         let num = i < 10 ? `0${i}` : i;
         imageHTML += `<img src="media/photos/image ${num}.jpeg" alt="Old Friend Gallery">`;
     }
     
-    // Inject the set of images TWICE. 
-    // This allows the CSS to translate 50% left and seamlessly restart the loop.
     carouselTrack.innerHTML = imageHTML + imageHTML;
 
-    // Interaction 1: Mouse Clicks (Toggle pause/play)
     let isMousePaused = false;
     carouselContainer.addEventListener('click', (e) => {
-        // Ignore touch events here so mobile behavior isn't triggered twice
         if (e.pointerType === 'touch') return; 
         
         isMousePaused = !isMousePaused;
@@ -56,13 +36,11 @@ if (carouselTrack && carouselContainer) {
         }
     });
 
-    // Interaction 2: Touch Screens (Hold to pause, release to play)
     carouselContainer.addEventListener('touchstart', () => {
         carouselTrack.classList.add('paused');
     }, { passive: true });
 
     carouselContainer.addEventListener('touchend', () => {
-        // Only resume if it wasn't explicitly paused by a mouse click
         if (!isMousePaused) {
             carouselTrack.classList.remove('paused');
         }
@@ -75,12 +53,7 @@ if (carouselTrack && carouselContainer) {
     });
 }
 
-
-
-
 // --- Advanced Menu & Modal Logic ---
-
-// 1. ADD YOUR TAB GIDs HERE:
 const sheetGIDs = {
     'Setting': '1364472520',
     'Alla Carta': '0',
@@ -97,10 +70,6 @@ const modal = document.getElementById('menu-modal');
 const modalContent = document.getElementById('modal-content');
 const modalClose = document.getElementById('modal-close');
 
-// Close modal when X is clicked
-if(modalClose) modalClose.addEventListener('click', () => modal.classList.remove('active'));
-
-// Robust CSV Parser
 function parseCSV(text) {
     const rows = [];
     let cur = '', inQuotes = false, row = [];
@@ -115,7 +84,6 @@ function parseCSV(text) {
     return rows;
 }
 
-// Converts ^1 or ^{1,7} into superscript HTML
 function formatAllergens(text) {
     return text.replace(/\^\{?([\d, ]+)\}?/g, '<sup class="allergen-sup">$1</sup>');
 }
@@ -129,7 +97,6 @@ if (menuContainer) {
             let allaCartaHtml = '';
             let degustazioneHtml = '';
 
-            // Loop through settings (skipping header)
             for (let i = 1; i < rows.length; i++) {
                 if (rows[i].length < 6) continue;
                 const [tipo, tab, nome, desc, costo, visibile] = rows[i];
@@ -137,13 +104,11 @@ if (menuContainer) {
                 if (visibile.toUpperCase() !== 'TRUE') continue;
 
                 if (tipo === 'Alla Carta') {
-                    // Alla Carta acts as both a category header and a clickable link
                     allaCartaHtml += `
                         <div class="menu-category-title" onclick="openMenuModal('${tab}', 'Alla Carta', '')" style="cursor:pointer;">
                             <span>Alla Carta <span class="plus-icon">+</span></span>
                         </div>`;
                 } else if (tipo === 'Degustazione') {
-                    // Tasting menus
                     degustazioneHtml += `
                         <div class="menu-link" onclick="openMenuModal('${tab}', '${nome}', '${costo}')">
                             <div class="menu-link-header">
@@ -163,13 +128,20 @@ if (menuContainer) {
         });
 }
 
-// Open Modal and Fetch specific Menu + Allergens
+// Helper function to close the modal visually and unlock scroll
+function closeModalVisuals() {
+    if (modal) modal.classList.remove('active');
+    document.body.classList.remove('modal-open');
+}
+
+// Open Modal and Fetch specific Menu + Allergens (with History Back Support)
 window.openMenuModal = function(tabName, menuTitle, menuPrice) {
-    // Lock the background scrolling
     document.body.classList.add('modal-open');
-    
     modalContent.innerHTML = "Caricamento in corso...";
     modal.classList.add('active');
+
+    // Push state so pressing mobile "Back" closes modal instead of navigating away
+    history.pushState({ modalOpen: true }, "");
 
     Promise.all([
         fetch(baseCSVUrl + sheetGIDs[tabName]).then(res => res.text()),
@@ -220,18 +192,27 @@ window.openMenuModal = function(tabName, menuTitle, menuPrice) {
     });
 };
 
-// Close modal and unlock background scrolling
-if(modalClose) {
+// Close modal when X is clicked (cleans up browser history state)
+if (modalClose) {
     modalClose.addEventListener('click', () => {
-        modal.classList.remove('active');
-        document.body.classList.remove('modal-open');
+        closeModalVisuals();
+        if (history.state && history.state.modalOpen) {
+            history.back();
+        }
     });
 }
 
-// --- Header Background Logic (Michelin Badge now scrolls away) ---
+// Catch mobile back gesture / hardware back button
+window.addEventListener('popstate', () => {
+    if (modal && modal.classList.contains('active')) {
+        closeModalVisuals();
+    }
+});
+
+// --- Header Background Logic ---
 const michelinWrapper = document.getElementById('michelin-wrapper');
 const fixedLogoContainer = document.querySelector('.fixed-logo-container');
-const hamburgerBtn = document.getElementById('hamburger-btn'); // Declared once here
+const hamburgerBtn = document.getElementById('hamburger-btn');
 const fullscreenMenu = document.getElementById('fullscreen-menu');
 
 window.addEventListener('scroll', () => {
@@ -266,16 +247,13 @@ navLinks.forEach(link => {
         const targetId = link.getAttribute('data-target');
         const targetAccordion = document.getElementById(targetId);
 
-        // 1. Close the full screen menu
         hamburgerBtn.classList.remove('open');
         if (fullscreenMenu) fullscreenMenu.classList.remove('active');
         document.body.classList.remove('modal-open');
 
-        // 2. Scroll to the specific accordion smoothly
         if (targetAccordion) {
             targetAccordion.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
-            // 3. Open the accordion if it is currently closed
             if (!targetAccordion.classList.contains('active')) {
                 setTimeout(() => {
                     targetAccordion.click();
