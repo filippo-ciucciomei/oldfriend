@@ -259,8 +259,8 @@ body.modal-open {
 /* The Prices (e.g. €90) */
 .menu-link-price {
     font-family: sans-serif; 
-    font-weight: 600; /* Restores the bold look from the screenshot */
-    font-size: 1.15rem; /* Restores the larger size */
+    font-weight: 400; /* Restores the bold look from the screenshot */
+    font-size: 0.95rem; /* Restores the larger size */
 }
 
 /* The Descriptions (e.g. 12 portate) */
