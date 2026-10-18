@@ -14,12 +14,19 @@
 
     <!-- Full Screen Menu Overlay -->
     <nav class="fullscreen-menu" id="fullscreen-menu">
-        <ul class="fullscreen-links">
-            <li><a href="https://oldfriend.superbexperience.com/reserve/experience" target="_blank">Booking</a></li>
-            <li><a href="#" class="nav-link" data-target="accordion-menu">Menu</a></li>
-            <li><a href="#" class="nav-link" data-target="accordion-who">Who we are</a></li>
-            <li><a href="#" class="nav-link" data-target="accordion-contact">Contact</a></li>
-        </ul>
+        <div class="menu-inner-container">
+            <!-- ENG / ITA Language Switcher (Positioned above nav items) -->
+            <div class="lang-switcher">
+                <span id="lang-btn-en" class="lang-btn">ENG</span> / <span id="lang-btn-it" class="lang-btn">ITA</span>
+            </div>
+
+            <ul class="fullscreen-links">
+                <li><a href="https://oldfriend.superbexperience.com/reserve/experience" target="_blank" data-i18n="navBooking">Booking</a></li>
+                <li><a href="#" class="nav-link" data-target="accordion-menu" data-i18n="navMenu">Menu</a></li>
+                <li><a href="#" class="nav-link" data-target="accordion-who" data-i18n="navWho">Who we are</a></li>
+                <li><a href="#" class="nav-link" data-target="accordion-contact" data-i18n="navContact">Contact</a></li>
+            </ul>
+        </div>
     </nav>
 
     <!-- Fixed Logo Container -->
@@ -41,14 +48,14 @@
         </div>
     </header>
 
-    <!-- New wrapper to keep the footer at the bottom of the screen -->
+    <!-- Main Content Wrapper -->
     <div class="scroll-content">
         
         <main class="menu-container">
             <!-- Standalone Booking Section (Crossfading Images) -->
             <a href="https://oldfriend.superbexperience.com/reserve/experience" target="_blank" class="booking-link">
                 <div class="booking-crossfade">
-                    <img src="media/photos/image 05.jpeg" class="cf-base-img" style="width: 100%; display: block; height: auto;">
+                    <img src="media/photos/image 05.jpeg" class="cf-base-img" style="width: 100%; display: block; height: auto;" alt="Booking">
                     
                     <img src="media/photos/image 05.jpeg" alt="Booking 1" class="cf-img cf-1">
                     <img src="media/photos/image 06.jpeg" alt="Booking 2" class="cf-img cf-2">
@@ -63,10 +70,12 @@
 
             <!-- Original Accordions -->
             <section class="menu-section">
-                <h2 class="menu-title" id="accordion-menu">Menu</h2>
+                <h2 class="menu-title" id="accordion-menu" data-i18n="accordionMenu">Menu</h2>
                 <div class="menu-content">
-                    <div id="dynamic-menu-container">Loading today's menus...</div>
-                </div>
+                    <div id="dynamic-menu-container">
+                         <span data-i18n="loadingMenu">Loading today's menus...</span>
+        </div>               
+     </div>
             </section>
 
             <!-- Menu Modal -->
@@ -75,55 +84,45 @@
                 <div class="modal-content" id="modal-content"></div>
             </div>
 
-           <section class="menu-section">
-                <h2 class="menu-title" id="accordion-who">Who we are</h2>
+            <section class="menu-section">
+                <h2 class="menu-title" id="accordion-who" data-i18n="accordionWho">Who we are</h2>
                 <div class="menu-content">
-                    <p>Old Friend was born from a desire to strip away the stiff pretensions of traditional fine dining without compromising on culinary brilliance. Helmed by Chef Dario Torabi, the restaurant operates on a strictly punk-rock philosophy: raw, authentic, and unapologetic. Rooted deeply in Cagliari, the kitchen champions wild fermentation, natural wines, and hyper-local Sardinian ingredients, elevating them with Michelin-level precision and technique. It is a space where the visceral energy of an underground venue meets absolute gastronomic rigor, proving that world-class cuisine doesn't need white tablecloths—just a rebellious, uncompromising passion for the craft.</p>
+                    <p data-i18n="whoText">A culinary concept shaped by Chef Dario Torabi's relentless research. An authentic, unadorned experience rooted in an obsession with exceptional ingredients, strict seasonality, and honoring every single element in its purest, most profound expression.</p>
                     
                     <img src="media/photos/image 07.jpeg" alt="Inside Old Friend" style="width: 100%; height: auto; margin-top: 25px; display: block;">
                 </div>
             </section>
 
             <section class="menu-section">
-            <h2 class="menu-title" id="accordion-contact">Contact</h2>
-            <div class="menu-content">
-                <p style="margin-top: 0; line-height: 1.6;">
-                    <strong>Address</strong><br>
-                    Via Giuseppe Abba, 51<br>
-                    09127 Cagliari CA, Italy
-                </p>
-                <p style="line-height: 1.6;">
-                    <strong>Contact</strong><br>
-                    <a href="mailto:info@oldfriendcagliari.com" style="color: #1a1a1a; text-decoration: none;">info@oldfriendcagliari.com</a><br>
-                    <a href="tel:+390000000000" style="color: #1a1a1a; text-decoration: none;">+39 000 000 0000</a>
-                </p>
-                <p style="line-height: 1.6; margin-bottom: 0;">
-                    <strong>Reservations</strong><br>
-                    <a href="https://oldfriend.superbexperience.com/reserve/experience" target="_blank" style="color: #8a1c1c; text-decoration: underline; font-weight: 500;">Book a Table</a>
-                </p>
-            </div>
-        </section>
-
-            
+                <h2 class="menu-title" id="accordion-contact" data-i18n="accordionContact">Contact</h2>
+                <div class="menu-content">
+                    <p style="margin-top: 0; line-height: 1.6;">
+                        <strong data-i18n="contactAddress">Address</strong><br>
+                        Via Giuseppe Abba, 51<br>
+                        09127 Cagliari CA, Italy
+                    </p>
+                    <p style="line-height: 1.6;">
+                        <strong data-i18n="contactHeader">Contact</strong><br>
+                        <a href="mailto:info@oldfriendcagliari.com" style="color: #1a1a1a; text-decoration: none;">info@oldfriendcagliari.com</a><br>
+                        <a href="tel:+390000000000" style="color: #1a1a1a; text-decoration: none;">+39 000 000 0000</a>
+                    </p>
+                    <p style="line-height: 1.6; margin-bottom: 0;">
+                        <strong data-i18n="contactReservations">Reservations</strong><br>
+                        <a href="https://oldfriend.superbexperience.com/reserve/experience" target="_blank" style="color: #8a1c1c; text-decoration: underline; font-weight: 500;" data-i18n="contactBookTable">Book a Table</a>
+                    </p>
+                </div>
+            </section>
 
         </main>
 
-       <!-- Fixed Footer (Now with Michelin Logo) -->
-        <!-- Footer with Michelin logo and Instagram icon -->
-        
-        
-
-        <!-- Footer with Michelin Logo and Instagram Icon aligned on the same row -->
+        <!-- Footer -->
         <footer class="site-footer">
-            <!-- Left spacer to ensure the Michelin badge stays perfectly centered in the layout -->
             <div class="footer-spacer"></div>
 
-            <!-- Centered Michelin Badge -->
             <div class="footer-michelin">
                 <img src="media/logos/michelin2026.png" alt="Michelin Guide 2026" class="michelin-img-small">
             </div>
             
-            <!-- Instagram Link aligned right -->
             <div class="footer-social">
                 <a href="https://www.instagram.com/oldfriendcagliari/" target="_blank" class="ig-link" aria-label="Instagram">
                     <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap');
 
 /* --- 1. BASE STYLES --- */
 body {
@@ -7,8 +7,8 @@ body {
     font-family: sans-serif;
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* Fallback for older screens */
-    min-height: 100dvh; /* The mobile fix */
+    min-height: 100vh;
+    min-height: 100dvh;
     background-color: #f4f1eb; 
     color: #1a1a1a;
 }
@@ -28,7 +28,7 @@ body.modal-open {
     align-items: center;
     padding: 30px 0 40px 0;
     box-sizing: border-box;
-    overflow: visible; /* Prevents clipping of Michelin badge */
+    overflow: visible;
 }
 
 .hero-video {
@@ -61,19 +61,19 @@ body.modal-open {
 }
 
 .logo {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Cinzel', serif;
     font-weight: 400;
     font-size: 2.5rem; 
     text-transform: uppercase;
     letter-spacing: 4px; 
     margin: 0;
-    color: #b1b0b0; /* Light grey by default to pop over video */
+    color: #b1b0b0; 
     transition: color 0.3s ease;
     pointer-events: auto;
 }
 
 .fixed-logo-container.scrolled-bg .logo {
-    color: #1c1c1c; /* Changes to dark over the white background */
+    color: #1c1c1c; 
 }
 
 .michelin-wrapper {
@@ -81,7 +81,7 @@ body.modal-open {
     bottom: 30px;
     width: 100%;
     height: 20px;
-    z-index: 1; /* Forces it above everything else */
+    z-index: 1; 
 }
 
 .michelin-badge {
@@ -94,13 +94,6 @@ body.modal-open {
     height: 12px;
     width: auto;
     opacity: 0.9;
-}
-
-.michelin-badge.stuck {
-    position: fixed;
-    top: 65px;
-    z-index: 1003;
-    padding-top: 10px;
 }
 
 /* --- 3. HAMBURGER MENU & OVERLAY --- */
@@ -121,11 +114,10 @@ body.modal-open {
     display: block;
     height: 2px;
     width: 100%;
-    background-color: #b1b0b0; /* Matches the light grey logo by default */
+    background-color: #b1b0b0; 
     transition: 0.3s;
 }
 
-/* Changes to dark when scrolled over the white background */
 .hamburger-btn.scrolled-bg span {
     background-color: #1c1c1c; 
 }
@@ -154,11 +146,39 @@ body.modal-open {
     pointer-events: auto;
 }
 
+.menu-inner-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+}
+
+/* Language Switcher Styling */
+.lang-switcher {
+    font-family: 'Cinzel', serif;
+    font-size: 0.9rem;
+    margin-bottom: 30px;
+    color: #1a1a1a;
+    user-select: none;
+}
+
+.lang-btn {
+    cursor: pointer;
+    color: #1a1a1a; /* Black by default for inactive language */
+    transition: color 0.2s ease;
+}
+
+.lang-btn.active {
+    color: #8a1c1c; /* Deep oxblood red for active language */
+    font-weight: 600;
+}
+
 .fullscreen-links {
     list-style: none;
     padding: 0;
+    margin: 0;
     text-align: center;
-    width: 80%;
+    width: 100%;
 }
 
 .fullscreen-links li {
@@ -172,7 +192,7 @@ body.modal-open {
 .fullscreen-links a {
     display: block;
     padding: 25px 0;
-    font-family: 'Playfair Display', serif;
+    font-family: 'Cinzel', serif;
     font-size: 2rem;
     color: #1a1a1a;
     text-decoration: none;
@@ -183,14 +203,14 @@ body.modal-open {
 .scroll-content {
     display: flex;
     flex-direction: column;
-    min-height: 100dvh; /* Ensures the video can scroll away fully */
+    min-height: 100dvh; 
     background-color: #f4f1eb;
     width: 100%;
 }
 
 .menu-container {
     padding: 20px 20px 0 20px;
-    flex: 1; /* Pushes the footer to the very bottom of the screen */
+    flex: 1; 
 }
 
 .menu-content {
@@ -198,12 +218,10 @@ body.modal-open {
     padding-bottom: 20px;
 }
 
-/* Automatically show the content ONLY when the title gets the active (italic/red) class */
 .menu-title.active + .menu-content {
     display: block;
 }
 
-/* The main accordion titles (Menu, Who we are, Contact) */
 .menu-title {
     cursor: pointer;
     padding: 20px 0;
@@ -214,22 +232,19 @@ body.modal-open {
     transition: all 0.2s ease-in-out;
 }
 
-/* 1. ONLY apply the italic and red color when the accordion is actually OPEN */
 .menu-title.active {
     font-style: italic;
     color: #8a1c1c; 
 }
 
-/* 2. Desktop-only hover effect (prevents the "sticky" bug on mobile phones) */
 @media (hover: hover) {
     .menu-title:hover {
-        color: #8a1c1c; /* Changes color on mouse hover, but won't stick on touch screens */
+        color: #8a1c1c; 
     }
 }
 
-/* "Alla Carta" and "Degustazione" Headers */
 .menu-category-title {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Cinzel', serif;
     font-size: 1.2rem; 
     font-weight: normal; 
     margin-top: 30px;
@@ -245,41 +260,39 @@ body.modal-open {
 }
 .menu-link:hover { color: #8a1c1c; }
 
-/* The Item Titles (e.g. A SUD DI NESSUN NORD) */
 .menu-link-header {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    font-family: 'Playfair Display', serif;
+    font-family: 'Cinzel', serif;
     font-weight: normal; 
-    font-size: 1rem; /* Increased back up from 0.85rem */
+    font-size: 1rem; 
     color: #1a1a1a;
 }
 
-/* The Prices (e.g. €90) */
 .menu-link-price {
     font-family: sans-serif; 
-    font-weight: 400; /* Restores the bold look from the screenshot */
-    font-size: 0.95rem; /* Restores the larger size */
+    font-weight: 400; 
+    font-size: 0.95rem; 
 }
 
-/* The Descriptions (e.g. 12 portate) */
 .menu-link-desc {
     margin: 2px 0 0 0;
     font-size: 0.9rem;
     color: #555;
 }
 
-/* Added Michelin Logo at the bottom of the accordions */
-.bottom-michelin {
-    display: flex;
-    justify-content: center;
-    padding: 60px 0 20px 0; /* Gives it breathing room below the contact info */
-}
-
 .menu-section {
     border-bottom: 1px solid #333;
     padding: 5px 0;
+}
+
+.plus-icon {
+    font-family: sans-serif;
+    font-weight: 300;
+    font-size: 1.1rem;
+    color: #8a1c1c; 
+    margin-left: 6px; 
 }
 
 /* --- 5. BOOKING CROSSFADE ANIMATION --- */
@@ -331,7 +344,7 @@ body.modal-open {
     line-height: 1.2; 
     font-size: 8vw; 
     letter-spacing: 5px; 
-    z-index: 2; /* Forces it above fading images */
+    z-index: 2; 
 }
 
 /* --- 6. MENU MODAL --- */
@@ -374,7 +387,7 @@ body.modal-open {
 }
 
 .modal-title {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Cinzel', serif;
     font-size: 2rem;
     text-align: center;
     text-transform: uppercase;
@@ -407,8 +420,9 @@ body.modal-open {
 }
 
 .dish-item-alla-carta strong {
-    font-weight: normal; 
-    font-family: 'Playfair Display', serif; 
+    font-family: sans-serif; 
+    font-weight: 400; 
+    font-size: 0.95rem; 
 }
 
 .oppure {
@@ -445,7 +459,6 @@ body.modal-open {
     width: 100%;
 }
 
-/* Three equal columns to maintain exact centering */
 .footer-spacer,
 .footer-michelin,
 .footer-social {
