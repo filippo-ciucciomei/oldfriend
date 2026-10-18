@@ -228,38 +228,32 @@ if(modalClose) {
     });
 }
 
-
-
-// --- Sticky Michelin Logic & Header Background ---
+// --- Header Background Logic (Michelin Badge now scrolls away) ---
 const michelinWrapper = document.getElementById('michelin-wrapper');
-const michelinBadge = document.getElementById('michelin-badge');
 const fixedLogoContainer = document.querySelector('.fixed-logo-container');
+const hamburgerBtn = document.getElementById('hamburger-btn'); // Declared once here
+const fullscreenMenu = document.getElementById('fullscreen-menu');
 
 window.addEventListener('scroll', () => {
-    if (michelinWrapper && michelinBadge) {
-        // Trigger at 80px to match the new increased spacing
+    if (michelinWrapper) {
         const rect = michelinWrapper.getBoundingClientRect();
+        
         if (rect.top <= 80) {
-            michelinBadge.classList.add('stuck');
             if (fixedLogoContainer) fixedLogoContainer.classList.add('scrolled-bg');
-            if (hamburgerBtn) hamburgerBtn.classList.add('scrolled-bg'); // <-- Add this
+            if (hamburgerBtn) hamburgerBtn.classList.add('scrolled-bg');
         } else {
-            michelinBadge.classList.remove('stuck');
             if (fixedLogoContainer) fixedLogoContainer.classList.remove('scrolled-bg');
-            if (hamburgerBtn) hamburgerBtn.classList.remove('scrolled-bg'); // <-- Add this
+            if (hamburgerBtn) hamburgerBtn.classList.remove('scrolled-bg');
         }
     }
 });
 
 // --- Hamburger Menu Logic ---
-const hamburgerBtn = document.getElementById('hamburger-btn');
-const fullscreenMenu = document.getElementById('fullscreen-menu');
-
 if (hamburgerBtn) {
     hamburgerBtn.addEventListener('click', () => {
         hamburgerBtn.classList.toggle('open');
-        fullscreenMenu.classList.toggle('active');
-        document.body.classList.toggle('modal-open'); // Locks background scroll
+        if (fullscreenMenu) fullscreenMenu.classList.toggle('active');
+        document.body.classList.toggle('modal-open');
     });
 }
 
@@ -274,7 +268,7 @@ navLinks.forEach(link => {
 
         // 1. Close the full screen menu
         hamburgerBtn.classList.remove('open');
-        fullscreenMenu.classList.remove('active');
+        if (fullscreenMenu) fullscreenMenu.classList.remove('active');
         document.body.classList.remove('modal-open');
 
         // 2. Scroll to the specific accordion smoothly
@@ -283,7 +277,6 @@ navLinks.forEach(link => {
 
             // 3. Open the accordion if it is currently closed
             if (!targetAccordion.classList.contains('active')) {
-                // Wait briefly for scroll to start before snapping it open
                 setTimeout(() => {
                     targetAccordion.click();
                 }, 300);

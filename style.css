@@ -57,7 +57,7 @@ body.modal-open {
 
 .fixed-logo-container.scrolled-bg {
     background-color: #f4f1eb; 
-    height: 90px;
+    height: 70px;
 }
 
 .logo {
@@ -81,7 +81,7 @@ body.modal-open {
     bottom: 30px;
     width: 100%;
     height: 20px;
-    z-index: 1004; /* Forces it above everything else */
+    z-index: 1; /* Forces it above everything else */
 }
 
 .michelin-badge {
@@ -106,7 +106,7 @@ body.modal-open {
 /* --- 3. HAMBURGER MENU & OVERLAY --- */
 .hamburger-btn {
     position: fixed;
-    top: 35px;
+    top: 38px;
     right: 25px;
     width: 30px;
     height: 20px;
@@ -180,32 +180,17 @@ body.modal-open {
 }
 
 /* --- 4. MAIN CONTENT & MENU ACCORDIONS --- */
-.menu-container {
-    margin: 0 0 30px 0; 
-    padding: 20px 20px 0 20px;
-    flex: 1;
+.scroll-content {
+    display: flex;
+    flex-direction: column;
+    min-height: 100dvh; /* Ensures the video can scroll away fully */
     background-color: #f4f1eb;
-    min-height: 110dvh; 
+    width: 100%;
 }
 
-.menu-section {
-    border-bottom: 1px solid #333;
-    padding: 5px 0;
-}
-
-.menu-title {
-    cursor: pointer;
-    padding: 20px 0;
-    margin: 0;
-    font-weight: normal;
-    -webkit-tap-highlight-color: transparent; 
-}
-
-.menu-title:hover,
-.menu-title.active {
-    font-style: italic;
-    color: #8a1c1c; 
-    transition: all 0.2s ease-in-out;
+.menu-container {
+    padding: 20px 20px 0 20px;
+    flex: 1; /* Pushes the footer to the very bottom of the screen */
 }
 
 .menu-content {
@@ -213,6 +198,36 @@ body.modal-open {
     padding-bottom: 20px;
 }
 
+/* Automatically show the content ONLY when the title gets the active (italic/red) class */
+.menu-title.active + .menu-content {
+    display: block;
+}
+
+/* The main accordion titles (Menu, Who we are, Contact) */
+.menu-title {
+    cursor: pointer;
+    padding: 20px 0;
+    margin: 0;
+    font-weight: 500; 
+    font-size: 1.5rem; 
+    -webkit-tap-highlight-color: transparent; 
+    transition: all 0.2s ease-in-out;
+}
+
+/* 1. ONLY apply the italic and red color when the accordion is actually OPEN */
+.menu-title.active {
+    font-style: italic;
+    color: #8a1c1c; 
+}
+
+/* 2. Desktop-only hover effect (prevents the "sticky" bug on mobile phones) */
+@media (hover: hover) {
+    .menu-title:hover {
+        color: #8a1c1c; /* Changes color on mouse hover, but won't stick on touch screens */
+    }
+}
+
+/* "Alla Carta" and "Degustazione" Headers */
 .menu-category-title {
     font-family: 'Playfair Display', serif;
     font-size: 1.2rem; 
@@ -230,35 +245,41 @@ body.modal-open {
 }
 .menu-link:hover { color: #8a1c1c; }
 
+/* The Item Titles (e.g. A SUD DI NESSUN NORD) */
 .menu-link-header {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
     font-family: 'Playfair Display', serif;
     font-weight: normal; 
-    font-size: 0.85rem; 
+    font-size: 1rem; /* Increased back up from 0.85rem */
     color: #1a1a1a;
 }
 
+/* The Prices (e.g. €90) */
 .menu-link-price {
     font-family: sans-serif; 
-    font-weight: 400;
-    font-size: 0.85rem;
+    font-weight: 600; /* Restores the bold look from the screenshot */
+    font-size: 1.15rem; /* Restores the larger size */
 }
 
+/* The Descriptions (e.g. 12 portate) */
 .menu-link-desc {
     margin: 2px 0 0 0;
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     color: #555;
 }
 
-.plus-icon {
-    font-family: sans-serif;
-    font-weight: 300;
-    font-size: 1.1rem;
-    color: #8a1c1c; 
-    margin-left: 6px; 
-    transition: transform 0.2s ease;
+/* Added Michelin Logo at the bottom of the accordions */
+.bottom-michelin {
+    display: flex;
+    justify-content: center;
+    padding: 60px 0 20px 0; /* Gives it breathing room below the contact info */
+}
+
+.menu-section {
+    border-bottom: 1px solid #333;
+    padding: 5px 0;
 }
 
 /* --- 5. BOOKING CROSSFADE ANIMATION --- */
@@ -317,14 +338,14 @@ body.modal-open {
 .menu-modal {
     display: none; 
     position: fixed;
-    top: 2.5%; 
-    left: 2.5%; 
-    width: 95vw; 
-    height: 95dvh; 
+    top: 0; 
+    left: 0; 
+    width: 100vw; 
+    height: 100dvh; 
     background-color: rgb(240, 232, 232); 
     border-color: #6d6c6c;
     border: 1px solid;
-    z-index: 2000;
+    z-index: 2006;
     overflow-y: auto;
     padding: 60px 20px 40px 20px;
     box-sizing: border-box;
@@ -417,15 +438,34 @@ body.modal-open {
     background-color: #f4f1eb; 
     color: #1a1a1a;
     display: flex;
-    justify-content: space-between; 
+    justify-content: space-between;
     align-items: center;
     padding: 25px 20px;
     box-sizing: border-box;
+    width: 100%;
 }
 
-.address {
-    font-size: 0.8rem;
-    color: #333;
+/* Three equal columns to maintain exact centering */
+.footer-spacer,
+.footer-michelin,
+.footer-social {
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+.footer-michelin {
+    justify-content: center;
+}
+
+.footer-social {
+    justify-content: flex-end;
+}
+
+.michelin-img-small {
+    height: 9px;
+    width: auto;
+    opacity: 0.7;
 }
 
 .ig-link {

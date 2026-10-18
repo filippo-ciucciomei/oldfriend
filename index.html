@@ -41,51 +41,50 @@
         </div>
     </header>
 
-    <main class="menu-container">
-        <!-- Standalone Booking Section (Crossfading Images) -->
-        <!-- Standalone Booking Section (Crossfading Images) -->
-        <a href="https://oldfriend.superbexperience.com/reserve/experience" target="_blank" class="booking-link">
-            <div class="booking-crossfade">
-                <!-- Base image (matches the first image so there is no flash on load) -->
-                <img src="media/photos/image 05.jpeg" class="cf-base-img" style="width: 100%; display: block; height: auto;">
-                
-                <!-- The 6 crossfading images -->
-                <img src="media/photos/image 05.jpeg" alt="Booking 1" class="cf-img cf-1">
-                <img src="media/photos/image 06.jpeg" alt="Booking 2" class="cf-img cf-2">
-                <img src="media/photos/image 04.jpeg" alt="Booking 3" class="cf-img cf-3">
-                <img src="media/photos/image 13.jpeg" alt="Booking 4" class="cf-img cf-4">
-                <img src="media/photos/image 15.jpeg" alt="Booking 5" class="cf-img cf-5">
-                <img src="media/photos/image 16.jpeg" alt="Booking 6" class="cf-img cf-6">
-                
-                <div class="booking-overlay" style="z-index: 2;">BOOK A<br>TABLE</div>
+    <!-- New wrapper to keep the footer at the bottom of the screen -->
+    <div class="scroll-content">
+        
+        <main class="menu-container">
+            <!-- Standalone Booking Section (Crossfading Images) -->
+            <a href="https://oldfriend.superbexperience.com/reserve/experience" target="_blank" class="booking-link">
+                <div class="booking-crossfade">
+                    <img src="media/photos/image 05.jpeg" class="cf-base-img" style="width: 100%; display: block; height: auto;">
+                    
+                    <img src="media/photos/image 05.jpeg" alt="Booking 1" class="cf-img cf-1">
+                    <img src="media/photos/image 06.jpeg" alt="Booking 2" class="cf-img cf-2">
+                    <img src="media/photos/image 04.jpeg" alt="Booking 3" class="cf-img cf-3">
+                    <img src="media/photos/image 13.jpeg" alt="Booking 4" class="cf-img cf-4">
+                    <img src="media/photos/image 15.jpeg" alt="Booking 5" class="cf-img cf-5">
+                    <img src="media/photos/image 16.jpeg" alt="Booking 6" class="cf-img cf-6">
+                    
+                    <div class="booking-overlay" style="z-index: 2;">BOOK A<br>TABLE</div>
+                </div>
+            </a>
+
+            <!-- Original Accordions -->
+            <section class="menu-section">
+                <h2 class="menu-title" id="accordion-menu">Menu</h2>
+                <div class="menu-content">
+                    <div id="dynamic-menu-container">Loading today's menus...</div>
+                </div>
+            </section>
+
+            <!-- Menu Modal -->
+            <div id="menu-modal" class="menu-modal">
+                <div class="modal-close" id="modal-close">&times;</div>
+                <div class="modal-content" id="modal-content"></div>
             </div>
-        </a>
 
-        <!-- Original Accordions -->
-        <section class="menu-section">
-            <h2 class="menu-title" id="accordion-menu">Menu</h2>
-            <div class="menu-content">
-                <div id="dynamic-menu-container">Loading today's menus...</div>
-            </div>
-        </section>
+           <section class="menu-section">
+                <h2 class="menu-title" id="accordion-who">Who we are</h2>
+                <div class="menu-content">
+                    <p>Old Friend was born from a desire to strip away the stiff pretensions of traditional fine dining without compromising on culinary brilliance. Helmed by Chef Dario Torabi, the restaurant operates on a strictly punk-rock philosophy: raw, authentic, and unapologetic. Rooted deeply in Cagliari, the kitchen champions wild fermentation, natural wines, and hyper-local Sardinian ingredients, elevating them with Michelin-level precision and technique. It is a space where the visceral energy of an underground venue meets absolute gastronomic rigor, proving that world-class cuisine doesn't need white tablecloths—just a rebellious, uncompromising passion for the craft.</p>
+                    
+                    <img src="media/photos/image 07.jpeg" alt="Inside Old Friend" style="width: 100%; height: auto; margin-top: 25px; display: block;">
+                </div>
+            </section>
 
-        <!-- Menu Modal -->
-        <div id="menu-modal" class="menu-modal">
-            <div class="modal-close" id="modal-close">&times;</div>
-            <div class="modal-content" id="modal-content"></div>
-        </div>
-
-       <section class="menu-section">
-            <h2 class="menu-title" id="accordion-who">Who we are</h2>
-            <div class="menu-content">
-                <p>Old Friend was born from a desire to strip away the stiff pretensions of traditional fine dining without compromising on culinary brilliance. Helmed by Chef Dario Torabi, the restaurant operates on a strictly punk-rock philosophy: raw, authentic, and unapologetic. Rooted deeply in Cagliari, the kitchen champions wild fermentation, natural wines, and hyper-local Sardinian ingredients, elevating them with Michelin-level precision and technique. It is a space where the visceral energy of an underground venue meets absolute gastronomic rigor, proving that world-class cuisine doesn't need white tablecloths—just a rebellious, uncompromising passion for the craft.</p>
-                
-                <!-- Added Image 07 -->
-                <img src="media/photos/image 07.jpeg" alt="Inside Old Friend" style="width: 100%; height: auto; margin-top: 25px; display: block;">
-            </div>
-        </section>
-
-        <section class="menu-section">
+            <section class="menu-section">
             <h2 class="menu-title" id="accordion-contact">Contact</h2>
             <div class="menu-content">
                 <p style="margin-top: 0; line-height: 1.6;">
@@ -98,19 +97,43 @@
                     <a href="mailto:info@oldfriendcagliari.com" style="color: #1a1a1a; text-decoration: none;">info@oldfriendcagliari.com</a><br>
                     <a href="tel:+390000000000" style="color: #1a1a1a; text-decoration: none;">+39 000 000 0000</a>
                 </p>
+                <p style="line-height: 1.6; margin-bottom: 0;">
+                    <strong>Reservations</strong><br>
+                    <a href="https://oldfriend.superbexperience.com/reserve/experience" target="_blank" style="color: #8a1c1c; text-decoration: underline; font-weight: 500;">Book a Table</a>
+                </p>
             </div>
         </section>
-    </main>
 
-    <!-- Fixed Footer -->
-    <footer class="site-footer">
-        <div class="address">Via Giuseppe Abba, 51, Cagliari</div>
-        <a href="https://www.instagram.com/oldfriendcagliari/" target="_blank" class="ig-link" aria-label="Instagram">
-            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
-            </svg>
-        </a>
-    </footer>
+            
+
+        </main>
+
+       <!-- Fixed Footer (Now with Michelin Logo) -->
+        <!-- Footer with Michelin logo and Instagram icon -->
+        
+        
+
+        <!-- Footer with Michelin Logo and Instagram Icon aligned on the same row -->
+        <footer class="site-footer">
+            <!-- Left spacer to ensure the Michelin badge stays perfectly centered in the layout -->
+            <div class="footer-spacer"></div>
+
+            <!-- Centered Michelin Badge -->
+            <div class="footer-michelin">
+                <img src="media/logos/michelin2026.png" alt="Michelin Guide 2026" class="michelin-img-small">
+            </div>
+            
+            <!-- Instagram Link aligned right -->
+            <div class="footer-social">
+                <a href="https://www.instagram.com/oldfriendcagliari/" target="_blank" class="ig-link" aria-label="Instagram">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+                    </svg>
+                </a>
+            </div>
+        </footer>
+        
+    </div>
 
     <script src="script.js"></script>
 </body>
