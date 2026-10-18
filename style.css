@@ -1,6 +1,6 @@
-/* @import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400&display=swap'); */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap');
 
+/* --- 1. BASE STYLES --- */
 body {
     margin: 0;
     padding-top: 0;
@@ -9,220 +9,318 @@ body {
     flex-direction: column;
     min-height: 100vh; /* Fallback for older screens */
     min-height: 100dvh; /* The mobile fix */
-    background-color: transparent; /* Keep this as #f4f1eb for style.css */
     background-color: #f4f1eb; 
-
     color: #1a1a1a;
 }
 
-/* Make the header fixed at the top and centered */
-.site-header {
+body.modal-open {
+    overflow: hidden;
+}
+
+/* --- 2. HERO HEADER & LOGOS --- */
+.hero-header {
+    position: relative;
+    width: 100%;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 0 40px 0;
+    box-sizing: border-box;
+    overflow: visible; /* Prevents clipping of Michelin badge */
+}
+
+.hero-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+}
+
+.fixed-logo-container {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    background-color: #f4f1eb; 
-    color: #1a1a1a;    text-align: center;
     padding: 15px 0;
-    z-index: 1000;
-    border-bottom: 1px solid #333;
+    z-index: 1002;
+    text-align: center;
+    background-color: transparent; 
+    pointer-events: none; 
+    transition: background-color 0.3s ease, height 0.3s ease;
+    height: 70px;
 }
 
-.menu-container {
-    margin-top: 120px; 
-    padding: 0 20px;
-    flex: 1; 
+.fixed-logo-container.scrolled-bg {
+    background-color: #f4f1eb; 
+    height: 90px;
 }
 
-/* Styling for each menu row */
-.menu-section {
-    border-bottom: 1px solid #333;
-    padding: 5px 0;
-}
-
-.menu-last-section {
-    border-bottom: 1px solid #333;
-    padding-top: 5px;
-    padding-bottom: 0;
-}
-
-/* The clickable menu titles */
-/* .menu-title {
-    cursor: pointer;
-    padding: 10px 0;
-    margin: 20px 0px;
-    font-weight: 400;
-} */
-
-/* Make the font cursive on hover */
-/* .menu-title:hover {
-    font-style: italic;
-} */
-
-/* The clickable menu titles */
-.menu-title {
-    cursor: pointer;
-    padding: 20px 0;
-    margin: 0;
-    font-weight: normal;
-    -webkit-tap-highlight-color: transparent; /* This removes the blue highlight on mobile */
-}
-
-/* Make the font cursive on hover (desktop) AND when tapped/active (mobile) */
-.menu-title:hover,
-.menu-title.active {
-    /* font-style: italic; */
-    /* font-family: 'Bodoni Moda', serif; */
-    font-style: italic;
-    /* font-size: 2rem;  */
-    color: #8a1c1c; /* Deep oxblood red */
-    transition: all 0.2s ease-in-out;
-}
-
-/* Hide the inner content by default */
-.menu-content {
-    display: none;
-    padding-bottom: 20px;
-}
-
-/* Style for the Old Friend header text */
 .logo {
     font-family: 'Playfair Display', serif;
     font-weight: 400;
     font-size: 2.5rem; 
     text-transform: uppercase;
-    letter-spacing: 4px; /* This spaces the letters out nicely like in your image */
+    letter-spacing: 4px; 
     margin: 0;
-    color: #1c1c1c; /* Adding a slightly muted grayish-purple tone similar to the image */
+    color: #b1b0b0; /* Light grey by default to pop over video */
+    transition: color 0.3s ease;
+    pointer-events: auto;
 }
 
-/* Fixed Footer */
-.site-footer {
-    /* position: fixed; */
-    background-color: #f4f1eb; 
-    color: #1a1a1a;
-    display: flex;
-    justify-content: space-between; 
-    align-items: center;
-    padding: 25px 20px;
-    box-sizing: border-box;
+.fixed-logo-container.scrolled-bg .logo {
+    color: #1c1c1c; /* Changes to dark over the white background */
 }
 
-.address {
-    font-size: 0.8rem;
-    color: #333;
+.michelin-wrapper {
+    position: absolute;
+    bottom: 30px;
+    width: 100%;
+    height: 20px;
+    z-index: 1004; /* Forces it above everything else */
 }
 
-.ig-link {
-    color: #333;
-    display: flex;
-    align-items: center;
-}
-
-.ig-link:hover {
-    color: #8b8386;
-}
-
-/* Ensure the last menu item isn't hidden behind the fixed footer */
-.menu-container {
-    margin-bottom: 30px; 
-}
-
-
-/* Michelin Guide Badge - Image */
 .michelin-badge {
     display: flex;
     justify-content: center;
-    margin-top: 10px;
+    width: 100%;
 }
 
 .michelin-img {
-    height: 18px; /* Keeps the logo small and elegant */
+    height: 12px;
     width: auto;
-    opacity: 0.9; /* Slight fade so it doesn't overpower the main logo */
+    opacity: 0.9;
 }
 
-
-/* Booking Image and Text Overlay */
-.booking-image-container {
-    position: relative;
-    max-width: 100%;
-    margin: 20px auto; /* Centers the image container on the screen */
+.michelin-badge.stuck {
+    position: fixed;
+    top: 65px;
+    z-index: 1003;
+    padding-top: 10px;
 }
 
-.booking-img {
-    width: 100%;
+/* --- 3. HAMBURGER MENU & OVERLAY --- */
+.hamburger-btn {
+    position: fixed;
+    top: 35px;
+    right: 25px;
+    width: 30px;
+    height: 20px;
+    z-index: 2005;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.hamburger-btn span {
     display: block;
-    height: auto;
+    height: 2px;
+    width: 100%;
+    background-color: #b1b0b0; /* Matches the light grey logo by default */
+    transition: 0.3s;
 }
 
-/* Link wrapper to remove default blue text/underline */
+/* Changes to dark when scrolled over the white background */
+.hamburger-btn.scrolled-bg span {
+    background-color: #1c1c1c; 
+}
+
+/* X Animation */
+.hamburger-btn.open span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+.hamburger-btn.open span:nth-child(2) { opacity: 0; }
+.hamburger-btn.open span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+
+.fullscreen-menu {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100dvh;
+    background-color: #f4f1eb;
+    z-index: 2004;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.fullscreen-menu.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.fullscreen-links {
+    list-style: none;
+    padding: 0;
+    text-align: center;
+    width: 80%;
+}
+
+.fullscreen-links li {
+    border-bottom: 1px solid #333;
+}
+
+.fullscreen-links li:first-child {
+    border-top: 1px solid #333;
+}
+
+.fullscreen-links a {
+    display: block;
+    padding: 25px 0;
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    color: #1a1a1a;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+/* --- 4. MAIN CONTENT & MENU ACCORDIONS --- */
+.menu-container {
+    margin: 0 0 30px 0; 
+    padding: 20px 20px 0 20px;
+    flex: 1;
+    background-color: #f4f1eb;
+    min-height: 110dvh; 
+}
+
+.menu-section {
+    border-bottom: 1px solid #333;
+    padding: 5px 0;
+}
+
+.menu-title {
+    cursor: pointer;
+    padding: 20px 0;
+    margin: 0;
+    font-weight: normal;
+    -webkit-tap-highlight-color: transparent; 
+}
+
+.menu-title:hover,
+.menu-title.active {
+    font-style: italic;
+    color: #8a1c1c; 
+    transition: all 0.2s ease-in-out;
+}
+
+.menu-content {
+    display: none;
+    padding-bottom: 20px;
+}
+
+.menu-category-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem; 
+    font-weight: normal; 
+    margin-top: 30px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #333;
+    padding-bottom: 5px;
+    color: #1a1a1a;
+}
+
+.menu-link {
+    cursor: pointer;
+    margin-bottom: 15px;
+}
+.menu-link:hover { color: #8a1c1c; }
+
+.menu-link-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-family: 'Playfair Display', serif;
+    font-weight: normal; 
+    font-size: 0.85rem; 
+    color: #1a1a1a;
+}
+
+.menu-link-price {
+    font-family: sans-serif; 
+    font-weight: 400;
+    font-size: 0.85rem;
+}
+
+.menu-link-desc {
+    margin: 2px 0 0 0;
+    font-size: 0.85rem;
+    color: #555;
+}
+
+.plus-icon {
+    font-family: sans-serif;
+    font-weight: 300;
+    font-size: 1.1rem;
+    color: #8a1c1c; 
+    margin-left: 6px; 
+    transition: transform 0.2s ease;
+}
+
+/* --- 5. BOOKING CROSSFADE ANIMATION --- */
 .booking-link {
     text-decoration: none;
     display: block;
 }
 
-/* Updated Booking Text Overlay - Massive Font */
+.booking-crossfade {
+    position: relative;
+    width: 95%;
+    margin: 60px auto 40px auto; 
+}
+
+.cf-img {
+    position: absolute;
+    top: 0; 
+    left: 0;
+    width: 100%; 
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    animation: crossfade 78s infinite linear;
+}
+
+.cf-1 { animation-delay: 0s; }
+.cf-2 { animation-delay: 13s; }
+.cf-3 { animation-delay: 26s; }
+.cf-4 { animation-delay: 39s; }
+.cf-5 { animation-delay: 52s; }
+.cf-6 { animation-delay: 65s; } 
+
+@keyframes crossfade {
+    0% { opacity: 0; }
+    4% { opacity: 1; }       
+    16.66% { opacity: 1; }   
+    21% { opacity: 0; }      
+    100% { opacity: 0; }
+}
+
 .booking-overlay {
     position: absolute;
-    top: 3%; /* Changed to percentage so it scales with the image */
+    top: 3%; 
     right: 3%;
     color: rgb(230, 230, 230);
     font-weight: 400;
     font-family: sans-serif; 
     text-align: right;
-    line-height: 1.2; /* Pulls the two massive lines closer together */
-    font-size: 8vw; /* Makes the text huge and scales dynamically with the screen */
-    letter-spacing: 5px; /* Adjust this number to add more or less space */
+    line-height: 1.2; 
+    font-size: 8vw; 
+    letter-spacing: 5px; 
+    z-index: 2; /* Forces it above fading images */
 }
 
-
-/* Image Carousel */
-.carousel-container {
-    width: 100%;
-    overflow: hidden;
-    white-space: nowrap; /* Forces all images onto a single line */
-    line-height: 0; /* Removes any default spacing below images */
-    cursor: pointer;
-    margin: 10px 0;
-}
-
-.carousel-track {
-    display: inline-block;
-    /* 40s is the speed of the scroll. Lower is faster. */
-    animation: scrollLeft 170s linear infinite; 
-}
-
-/* This class will be added by JS to pause the animation */
-.carousel-track.paused {
-    animation-play-state: paused;
-}
-
-.carousel-track img {
-    height: 50vh; /* Exactly 35% of the phone screen height */
-    width: auto;
-    display: inline-block;
-    margin: 0;
-    padding: 0;
-    vertical-align: top;
-    /* No spaces or margins between images as requested */
-}
-
-/* Shifts the track exactly 50% to create a seamless infinite loop */
-@keyframes scrollLeft {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); } 
-}
-
-
+/* --- 6. MENU MODAL --- */
 .menu-modal {
     display: none; 
     position: fixed;
     top: 2.5%; 
     left: 2.5%; 
     width: 95vw; 
-    height: 95vh; /* Fallback */
-    height: 95dvh; /* The mobile fix */
+    height: 95dvh; 
     background-color: rgb(240, 232, 232); 
     border-color: #6d6c6c;
     border: 1px solid;
@@ -251,86 +349,9 @@ body {
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    min-height: calc(100vh - 100px); /* Fallback */
-    min-height: calc(100dvh - 100px); /* The mobile fix */
+    min-height: calc(100dvh - 100px); 
 }
 
-
-
-/* Clickable Menu Links */
-.menu-link {
-    cursor: pointer;
-    margin-bottom: 15px;
-    padding-left: 10px;
-}
-.menu-link:hover { color: #8a1c1c; }
-
-/* --- UI Locks & Icons --- */
-body.modal-open {
-    overflow: hidden;
-}
-
-/* The punk-red plus sign */
-.plus-icon {
-    font-family: sans-serif;
-    font-weight: 300;
-    font-size: 1.1rem;
-    color: #8a1c1c; 
-    margin-left: 6px; /* Puts the + right next to the text */
-    transition: transform 0.2s ease;
-}
-
-/* --- Menu List Typography --- */
-/* Unifies "Alla Carta" and "Degustazione" */
-.menu-category-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.2rem; /* Returned to original size (smaller than Menu) */
-    font-weight: normal; /* Removed bold */
-    margin-top: 30px;
-    margin-bottom: 15px;
-    border-bottom: 1px solid #333;
-    padding-bottom: 5px;
-    color: #1a1a1a;
-}
-
-/* Controls the font weight of the Alla Carta prices */
-.dish-item-alla-carta strong {
-    font-weight: normal; /* You can change this to 300, 400, or 'lighter' if needed */
-    font-family: 'Playfair Display', serif; 
-}
-
-/* Individual Menus (A Sud di nessun Nord, etc.) */
-.menu-link {
-    cursor: pointer;
-    margin-bottom: 15px;
-    /* Removed the padding-left so everything aligns perfectly with the border */
-}
-.menu-link:hover { color: #8a1c1c; }
-
-.menu-link-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    font-family: 'Playfair Display', serif;
-    font-weight: normal; 
-    font-size: 0.85rem; /* Smaller than Alla Carta/Degustazione */
-    color: #1a1a1a;
-}
-
-.menu-link-price {
-    /* font-weight: bold;  */
-    font-family: sans-serif; 
-    font-size: 1.05rem;
-}
-
-.menu-link-desc {
-    margin: 2px 0 0 0;
-    font-size: 0.85rem;
-    color: #555;
-}
-
-
-/* Inside the Modal Styles */
 .modal-title {
     font-family: 'Playfair Display', serif;
     font-size: 2rem;
@@ -360,9 +381,13 @@ body.modal-open {
     font-size: 1.1rem;
 }
 
-/* Add this new block to push the first item down */
 .dish-item-alla-carta:first-of-type {
     margin-top: 30px; 
+}
+
+.dish-item-alla-carta strong {
+    font-weight: normal; 
+    font-family: 'Playfair Display', serif; 
 }
 
 .oppure {
@@ -372,7 +397,6 @@ body.modal-open {
     color: #555;
 }
 
-/* Allergens */
 .allergen-sup {
     font-size: 0.6rem;
     margin-left: 2px;
@@ -381,9 +405,35 @@ body.modal-open {
 .allergen-footer {
     margin-top: auto; 
     padding-top: 30px;
-    padding-bottom: 20px; /* Gives the text room to breathe above the phone edge */
+    padding-bottom: 20px; 
     border-top: 1px solid #ccc;
     font-size: 0.75rem;
     color: #555;
     line-height: 1.5;
+}
+
+/* --- 7. FOOTER --- */
+.site-footer {
+    background-color: #f4f1eb; 
+    color: #1a1a1a;
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    padding: 25px 20px;
+    box-sizing: border-box;
+}
+
+.address {
+    font-size: 0.8rem;
+    color: #333;
+}
+
+.ig-link {
+    color: #333;
+    display: flex;
+    align-items: center;
+}
+
+.ig-link:hover {
+    color: #8b8386;
 }

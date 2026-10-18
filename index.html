@@ -7,98 +7,104 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Hamburger Button -->
+    <div class="hamburger-btn" id="hamburger-btn">
+        <span></span><span></span><span></span>
+    </div>
 
-   <!-- Fixed Header -->
-    <header class="site-header">
+    <!-- Full Screen Menu Overlay -->
+    <nav class="fullscreen-menu" id="fullscreen-menu">
+        <ul class="fullscreen-links">
+            <li><a href="https://oldfriend.superbexperience.com/reserve/experience" target="_blank">Booking</a></li>
+            <li><a href="#" class="nav-link" data-target="accordion-menu">Menu</a></li>
+            <li><a href="#" class="nav-link" data-target="accordion-who">Who we are</a></li>
+            <li><a href="#" class="nav-link" data-target="accordion-contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Fixed Logo Container -->
+    <div class="fixed-logo-container">
         <h1 class="logo">Old Friend</h1>
+    </div>
+
+    <!-- Full-Screen Video Hero -->
+    <header class="hero-header">
+        <video autoplay muted loop playsinline class="hero-video">
+            <source src="media/videos/image 20.mp4" type="video/mp4">
+        </video>
         
-       <!-- Michelin Badge -->
-        <div class="michelin-badge">
-            <img src="media/logos/michelin2026.png" alt="Michelin Guide 2026" class="michelin-img">
+        <!-- Michelin Badge Wrapper for Sticky Logic -->
+        <div class="michelin-wrapper" id="michelin-wrapper">
+            <div class="michelin-badge" id="michelin-badge">
+                <img src="media/logos/michelin2026.png" alt="Michelin Guide 2026" class="michelin-img">
+            </div>
         </div>
     </header>
 
-    <!-- Accordion Sections -->
     <main class="menu-container">
-        
-        <section class="menu-section">
-            <h2 class="menu-title">Booking</h2>
-            <div class="menu-content">
-                <!-- Wrap the container in an anchor (link) tag -->
-                <a href="https://oldfriend.superbexperience.com/reserve/experience" target="_blank" class="booking-link">
-                    <div class="booking-image-container">
-                        <img src="media/photos/image 05.jpeg" alt="Booking" class="booking-img">
-                        <div class="booking-overlay">BOOK A<br>TABLE</div>
-                    </div>
-                </a>
+        <!-- Standalone Booking Section (Crossfading Images) -->
+        <!-- Standalone Booking Section (Crossfading Images) -->
+        <a href="https://oldfriend.superbexperience.com/reserve/experience" target="_blank" class="booking-link">
+            <div class="booking-crossfade">
+                <!-- Base image (matches the first image so there is no flash on load) -->
+                <img src="media/photos/image 05.jpeg" class="cf-base-img" style="width: 100%; display: block; height: auto;">
+                
+                <!-- The 6 crossfading images -->
+                <img src="media/photos/image 05.jpeg" alt="Booking 1" class="cf-img cf-1">
+                <img src="media/photos/image 06.jpeg" alt="Booking 2" class="cf-img cf-2">
+                <img src="media/photos/image 04.jpeg" alt="Booking 3" class="cf-img cf-3">
+                <img src="media/photos/image 13.jpeg" alt="Booking 4" class="cf-img cf-4">
+                <img src="media/photos/image 15.jpeg" alt="Booking 5" class="cf-img cf-5">
+                <img src="media/photos/image 16.jpeg" alt="Booking 6" class="cf-img cf-6">
+                
+                <div class="booking-overlay" style="z-index: 2;">BOOK A<br>TABLE</div>
             </div>
-        </section>
+        </a>
 
-         <!-- MENU SECTION BELOW -->
-         <!-- Updated Menu Section -->
+        <!-- Original Accordions -->
         <section class="menu-section">
-            <h2 class="menu-title">Menu</h2>
+            <h2 class="menu-title" id="accordion-menu">Menu</h2>
             <div class="menu-content">
                 <div id="dynamic-menu-container">Loading today's menus...</div>
             </div>
         </section>
 
-    <!-- Menu Modal (Hidden by default) -->
-    <div id="menu-modal" class="menu-modal">
-        <div class="modal-close" id="modal-close">&times;</div>
-        <div class="modal-content" id="modal-content">
-            <!-- JavaScript will inject the specific menu and allergens here -->
+        <!-- Menu Modal -->
+        <div id="menu-modal" class="menu-modal">
+            <div class="modal-close" id="modal-close">&times;</div>
+            <div class="modal-content" id="modal-content"></div>
         </div>
-    </div>
 
-    <!-- MENU SECTION ABOVE -->
-
-        <section class="menu-section">
-            <h2 class="menu-title">Images</h2>
-            <div class="menu-content">
-                <!-- Carousel Container -->
-                <div class="carousel-container" id="image-carousel">
-                    <div class="carousel-track" id="carousel-track">
-                        <!-- JavaScript will inject the images here -->
-                    </div>
-                </div>
-            </div>
-        </section>
-
-
-        <section class="menu-section">
-            <h2 class="menu-title">Who we are</h2>
+       <section class="menu-section">
+            <h2 class="menu-title" id="accordion-who">Who we are</h2>
             <div class="menu-content">
                 <p>Old Friend was born from a desire to strip away the stiff pretensions of traditional fine dining without compromising on culinary brilliance. Helmed by Chef Dario Torabi, the restaurant operates on a strictly punk-rock philosophy: raw, authentic, and unapologetic. Rooted deeply in Cagliari, the kitchen champions wild fermentation, natural wines, and hyper-local Sardinian ingredients, elevating them with Michelin-level precision and technique. It is a space where the visceral energy of an underground venue meets absolute gastronomic rigor, proving that world-class cuisine doesn't need white tablecloths—just a rebellious, uncompromising passion for the craft.</p>
+                
+                <!-- Added Image 07 -->
+                <img src="media/photos/image 07.jpeg" alt="Inside Old Friend" style="width: 100%; height: auto; margin-top: 25px; display: block;">
             </div>
         </section>
 
         <section class="menu-section">
-            <h2 class="menu-title">Contact</h2>
+            <h2 class="menu-title" id="accordion-contact">Contact</h2>
             <div class="menu-content">
-                
                 <p style="margin-top: 0; line-height: 1.6;">
                     <strong>Address</strong><br>
                     Via Giuseppe Abba, 51<br>
                     09127 Cagliari CA, Italy
                 </p>
-              
                 <p style="line-height: 1.6;">
                     <strong>Contact</strong><br>
                     <a href="mailto:info@oldfriendcagliari.com" style="color: #1a1a1a; text-decoration: none;">info@oldfriendcagliari.com</a><br>
                     <a href="tel:+390000000000" style="color: #1a1a1a; text-decoration: none;">+39 000 000 0000</a>
                 </p>
-        
             </div>
         </section>
-
     </main>
 
     <!-- Fixed Footer -->
     <footer class="site-footer">
         <div class="address">Via Giuseppe Abba, 51, Cagliari</div>
-        
-        <!-- Instagram Logo (SVG) -->
         <a href="https://www.instagram.com/oldfriendcagliari/" target="_blank" class="ig-link" aria-label="Instagram">
             <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
                 <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>

@@ -227,3 +227,67 @@ if(modalClose) {
         document.body.classList.remove('modal-open');
     });
 }
+
+
+
+// --- Sticky Michelin Logic & Header Background ---
+const michelinWrapper = document.getElementById('michelin-wrapper');
+const michelinBadge = document.getElementById('michelin-badge');
+const fixedLogoContainer = document.querySelector('.fixed-logo-container');
+
+window.addEventListener('scroll', () => {
+    if (michelinWrapper && michelinBadge) {
+        // Trigger at 80px to match the new increased spacing
+        const rect = michelinWrapper.getBoundingClientRect();
+        if (rect.top <= 80) {
+            michelinBadge.classList.add('stuck');
+            if (fixedLogoContainer) fixedLogoContainer.classList.add('scrolled-bg');
+            if (hamburgerBtn) hamburgerBtn.classList.add('scrolled-bg'); // <-- Add this
+        } else {
+            michelinBadge.classList.remove('stuck');
+            if (fixedLogoContainer) fixedLogoContainer.classList.remove('scrolled-bg');
+            if (hamburgerBtn) hamburgerBtn.classList.remove('scrolled-bg'); // <-- Add this
+        }
+    }
+});
+
+// --- Hamburger Menu Logic ---
+const hamburgerBtn = document.getElementById('hamburger-btn');
+const fullscreenMenu = document.getElementById('fullscreen-menu');
+
+if (hamburgerBtn) {
+    hamburgerBtn.addEventListener('click', () => {
+        hamburgerBtn.classList.toggle('open');
+        fullscreenMenu.classList.toggle('active');
+        document.body.classList.toggle('modal-open'); // Locks background scroll
+    });
+}
+
+// --- Menu Navigation & Auto-Open Accordions ---
+const navLinks = document.querySelectorAll('.nav-link');
+
+navLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = link.getAttribute('data-target');
+        const targetAccordion = document.getElementById(targetId);
+
+        // 1. Close the full screen menu
+        hamburgerBtn.classList.remove('open');
+        fullscreenMenu.classList.remove('active');
+        document.body.classList.remove('modal-open');
+
+        // 2. Scroll to the specific accordion smoothly
+        if (targetAccordion) {
+            targetAccordion.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+            // 3. Open the accordion if it is currently closed
+            if (!targetAccordion.classList.contains('active')) {
+                // Wait briefly for scroll to start before snapping it open
+                setTimeout(() => {
+                    targetAccordion.click();
+                }, 300);
+            }
+        }
+    });
+});
