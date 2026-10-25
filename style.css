@@ -17,18 +17,20 @@ body.modal-open {
     overflow: hidden;
 }
 
-/* --- 2. HERO HEADER & LOGOS --- */
+/* --- 2. HERO HEADER & VIDEO (100% Viewport Width) --- */
 .hero-header {
     position: relative;
     width: 100%;
     height: 100dvh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    padding: 30px 0 40px 0;
     box-sizing: border-box;
-    overflow: visible;
+    overflow: hidden;
+}
+
+.hero-video-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
 }
 
 .hero-video {
@@ -41,6 +43,7 @@ body.modal-open {
     z-index: 0;
 }
 
+/* --- FIXED HEADER & DESKTOP LANGUAGE TOGGLE --- */
 .fixed-logo-container {
     position: fixed;
     top: 0;
@@ -50,14 +53,43 @@ body.modal-open {
     z-index: 1002;
     text-align: center;
     background-color: transparent; 
-    pointer-events: none; 
-    transition: background-color 0.3s ease, height 0.3s ease;
-    height: 70px;
+    pointer-events: none;
+    transition: background-color 0.3s ease;
 }
 
 .fixed-logo-container.scrolled-bg {
     background-color: #f4f1eb; 
-    height: 70px;
+}
+
+/* Top-Right Language Toggle (Fixed with header, always clickable) */
+.fixed-desktop-lang {
+    display: none;
+    position: absolute;
+    top: 25px;
+    right: 40px;
+    z-index: 2005;
+    font-family: 'Cinzel', serif;
+    font-size: 0.85rem;
+    letter-spacing: 1.5px;
+    color: #b1b0b0;
+    pointer-events: auto;
+    user-select: none;
+    transition: color 0.3s ease;
+}
+
+.fixed-logo-container.scrolled-bg .fixed-desktop-lang {
+    color: #1c1c1c;
+}
+
+.fixed-desktop-lang .lang-btn {
+    cursor: pointer;
+    color: inherit;
+    transition: color 0.2s ease;
+}
+
+.fixed-desktop-lang .lang-btn.active {
+    color: #8a1c1c !important;
+    font-weight: 600;
 }
 
 .logo {
@@ -74,6 +106,41 @@ body.modal-open {
 
 .fixed-logo-container.scrolled-bg .logo {
     color: #1c1c1c; 
+}
+
+/* Desktop Navigation Bar (Hidden on Mobile) */
+.desktop-nav {
+    display: none;
+    pointer-events: auto;
+    margin-top: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+.desktop-nav-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 25px;
+}
+
+.desktop-nav-links a {
+    font-family: 'Cinzel', serif;
+    font-size: 0.95rem;
+    color: #b1b0b0;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    transition: color 0.3s ease;
+}
+
+.fixed-logo-container.scrolled-bg .desktop-nav-links a {
+    color: #1c1c1c;
+}
+
+.desktop-nav-links a:hover {
+    color: #8a1c1c !important;
 }
 
 .michelin-wrapper {
@@ -96,13 +163,14 @@ body.modal-open {
     opacity: 0.9;
 }
 
-/* --- 3. HAMBURGER MENU & OVERLAY --- */
+/* --- 3. MOBILE HAMBURGER MENU & OVERLAY --- */
+/* --- 3. MOBILE HAMBURGER MENU & OVERLAY --- */
 .hamburger-btn {
     position: fixed;
-    top: 38px;
+    top: 32px; /* Shifted up from 38px to align centers with the logo */
     right: 25px;
     width: 30px;
-    height: 20px;
+    height: 18px; /* Slightly tightened from 20px for balanced bar proportions */
     z-index: 2005;
     cursor: pointer;
     display: flex;
@@ -153,10 +221,9 @@ body.modal-open {
     width: 80%;
 }
 
-/* Language Switcher Styling */
 .lang-switcher {
     font-family: 'Cinzel', serif;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     margin-bottom: 30px;
     color: #1a1a1a;
     user-select: none;
@@ -164,12 +231,11 @@ body.modal-open {
 
 .lang-btn {
     cursor: pointer;
-    color: #1a1a1a; /* Black by default for inactive language */
     transition: color 0.2s ease;
 }
 
 .lang-btn.active {
-    color: #8a1c1c; /* Deep oxblood red for active language */
+    color: #8a1c1c !important; 
     font-weight: 600;
 }
 
@@ -211,6 +277,10 @@ body.modal-open {
 .menu-container {
     padding: 20px 20px 0 20px;
     flex: 1; 
+    max-width: 900px;
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .menu-content {
@@ -304,7 +374,8 @@ body.modal-open {
 .booking-crossfade {
     position: relative;
     width: 95%;
-    margin: 60px auto 40px auto; 
+    max-width: 900px;
+    margin: 40px auto; 
 }
 
 .cf-img {
@@ -370,8 +441,8 @@ body.modal-open {
 
 .modal-close {
     position: absolute;
-    top: 20px; 
-    right: 30px;
+    top: 25px; 
+    right: 35px;
     font-size: 2.5rem; 
     cursor: pointer;
     font-family: sans-serif;
@@ -389,6 +460,7 @@ body.modal-open {
 .modal-title {
     font-family: 'Cinzel', serif;
     font-size: 2rem;
+    font-weight: 400;
     text-align: center;
     text-transform: uppercase;
     margin-bottom: 5px;
@@ -457,6 +529,8 @@ body.modal-open {
     padding: 25px 20px;
     box-sizing: border-box;
     width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
 }
 
 .footer-spacer,
@@ -488,5 +562,45 @@ body.modal-open {
 }
 
 .ig-link:hover {
-    color: #8b8386;
+    color: #8a1c1c;
+}
+
+/* --- 8. DESKTOP MEDIA QUERY (min-width: 769px) --- */
+@media screen and (min-width: 769px) {
+    .hamburger-btn {
+        display: none !important;
+    }
+
+    /* Fixed Top-Right Language Switcher becomes visible */
+    .fixed-desktop-lang {
+        display: block;
+    }
+
+    /* Horizontal Navbar appears under Logo */
+    .desktop-nav {
+        display: flex;
+    }
+
+    /* Hero Video spans 100% full viewport width */
+    .hero-header,
+    .hero-video-wrapper {
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+        border-radius: 0;
+    }
+
+    .booking-overlay {
+        font-size: 3.8rem;
+    }
+
+    .menu-modal {
+        top: 5vh;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 650px;
+        height: 90vh;
+        border-radius: 4px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
 }

@@ -38,7 +38,7 @@ const translations = {
 
 let currentLang = 'en';
 
-// Detect language on startup (localStorage -> browser language -> default EN)
+// Detect language on startup
 function initLanguage() {
     const savedLang = localStorage.getItem('site_lang');
     if (savedLang) {
@@ -50,47 +50,59 @@ function initLanguage() {
     applyLanguage(currentLang);
 }
 
-// Update DOM elements with data-i18n attributes
 function applyLanguage(lang) {
     currentLang = lang;
     localStorage.setItem('site_lang', lang);
 
     document.querySelectorAll('[data-i18n]').forEach(el => {
-        // Skip updating the loading text if the food menu has already loaded into the container
-        if (el.getAttribute('data-i18n') === 'loadingMenu' && !document.querySelector('[data-i18n="loadingMenu"]')) {
-            return;
-        }
-
         const key = el.getAttribute('data-i18n');
         if (translations[lang][key]) {
             el.innerHTML = translations[lang][key];
         }
     });
 
-    // Update Language Buttons Active Class
-    const btnEn = document.getElementById('lang-btn-en');
-    const btnIt = document.getElementById('lang-btn-it');
-
-    if (btnEn && btnIt) {
-        if (lang === 'en') {
-            btnEn.classList.add('active');
-            btnIt.classList.remove('active');
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        if ((lang === 'en' && btn.id.includes('-en')) || (lang === 'it' && btn.id.includes('-it'))) {
+            btn.classList.add('active');
         } else {
-            btnIt.classList.add('active');
-            btnEn.classList.remove('active');
+            btn.classList.remove('active');
         }
+    });
+}
+
+// --- Dynamic Hero Video Swapper (Mobile: long, Desktop: short) ---
+function setupResponsiveVideo() {
+    const video = document.getElementById('hero-video');
+    const source = document.getElementById('hero-video-source');
+    if (!video || !source) return;
+
+    const isDesktop = window.innerWidth >= 769;
+    const desktopVideoSrc = 'media/videos/image 20 (no-audio) short.mp4';
+    const mobileVideoSrc = 'media/videos/image 20 (no-audio) long.mp4';
+    const targetSrc = isDesktop ? desktopVideoSrc : mobileVideoSrc;
+
+    // Only switch and reload if source path actually changes
+    if (!source.getAttribute('src').includes(targetSrc)) {
+        source.setAttribute('src', targetSrc);
+        video.load();
+        video.play().catch(() => {});
     }
 }
 
-// Initialize on DOM Load and register ENG / ITA click handlers
 document.addEventListener('DOMContentLoaded', () => {
     initLanguage();
+    setupResponsiveVideo();
 
-    const btnEn = document.getElementById('lang-btn-en');
-    const btnIt = document.getElementById('lang-btn-it');
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            if (btn.id.includes('-en')) applyLanguage('en');
+            if (btn.id.includes('-it')) applyLanguage('it');
+        });
+    });
+});
 
-    if (btnEn) btnEn.addEventListener('click', () => applyLanguage('en'));
-    if (btnIt) btnIt.addEventListener('click', () => applyLanguage('it'));
+window.addEventListener('resize', () => {
+    setupResponsiveVideo();
 });
 
 // --- Accordion Logic ---
@@ -181,7 +193,6 @@ function formatAllergens(text) {
     return text.replace(/\^\{?([\d, ]+)\}?/g, '<sup class="allergen-sup">$1</sup>');
 }
 
-// Initial Load: Fetch Settings Tab
 if (menuContainer) {
     fetch(baseCSVUrl + sheetGIDs['Setting'])
         .then(res => res.text())
@@ -226,7 +237,6 @@ function closeModalVisuals() {
     document.body.classList.remove('modal-open');
 }
 
-// Open Modal & Fetch Specific Menu + Allergens (with History Back Support)
 window.openMenuModal = function(tabName, menuTitle, menuPrice) {
     document.body.classList.add('modal-open');
     modalContent.innerHTML = currentLang === 'it' ? "Caricamento in corso..." : "Loading...";
@@ -331,7 +341,7 @@ if (hamburgerBtn) {
     });
 }
 
-// --- Menu Navigation & Auto-Open Accordions ---
+// --- Menu Navigation & Precise Scroll to Top Edge ---
 const navLinks = document.querySelectorAll('.nav-link');
 
 navLinks.forEach(link => {
@@ -340,18 +350,27 @@ navLinks.forEach(link => {
         const targetId = link.getAttribute('data-target');
         const targetAccordion = document.getElementById(targetId);
 
-        hamburgerBtn.classList.remove('open');
+        if (hamburgerBtn) hamburgerBtn.classList.remove('open');
         if (fullscreenMenu) fullscreenMenu.classList.remove('active');
         document.body.classList.remove('modal-open');
 
         if (targetAccordion) {
-            targetAccordion.scrollIntoView({ behavior: 'smooth', block: 'start' });
-
+            // Open the accordion if closed
             if (!targetAccordion.classList.contains('active')) {
-                setTimeout(() => {
-                    targetAccordion.click();
-                }, 300);
+                targetAccordion.click();
             }
+
+            // Calculate precise offset so it aligns exactly under the header
+            setTimeout(() => {
+                const headerHeight = fixedLogoContainer ? fixedLogoContainer.offsetHeight : 80;
+                const elementPosition = targetAccordion.getBoundingClientRect().top + window.pageYOffset;
+                const offsetPosition = elementPosition - headerHeight - 10;
+
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }, 100);
         }
     });
 });

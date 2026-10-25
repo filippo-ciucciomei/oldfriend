@@ -7,17 +7,14 @@
     <link rel="stylesheet" href="style.css">
 
     <!-- SEO -->
-     <meta name="description" content="Old Friend is a Michelin-selected restaurant in Cagliari by Chef Dario Torabi. Experience wild fermentation, natural wines, and hyper-local Sardinian gastronomy.">
+    <meta name="description" content="Old Friend is a Michelin-selected restaurant in Cagliari by Chef Dario Torabi. Experience wild fermentation, natural wines, and hyper-local Sardinian gastronomy.">
     <meta name="keywords" content="Old Friend Cagliari, Ristorante Cagliari, Fine Dining Sardinia, Chef Dario Torabi, Michelin Guide Cagliari">
 
-    <!-- Open Graph (How the site appears when shared on WhatsApp, Instagram, or iMessage) -->
+    <!-- Open Graph -->
     <meta property="og:title" content="Old Friend | Restaurant & Natural Wine Bar Cagliari">
     <meta property="og:description" content="Unapologetic, high-precision gastronomy in Cagliari. Book a table or explore today's menus.">
     <meta property="og:image" content="https://yourdomain.com/media/photos/image%2007.jpeg">
     <meta property="og:url" content="https://yourdomain.com">
-
-
-    <!-- SEO -->
 
     <script type="application/ld+json">
     {
@@ -27,7 +24,7 @@
     "image": "https://yourdomain.com/media/photos/image%2007.jpeg",
     "@id": "https://yourdomain.com",
     "url": "https://yourdomain.com",
-    "telephone": "+390000000000",
+    "telephone": "+390704647988",
     "priceRange": "€€€",
     "address": {
         "@type": "PostalAddress",
@@ -46,25 +43,27 @@
     }
     </script>
 
-
+    <link rel="apple-touch-icon" sizes="180x180" href="media/favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="media/favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="media/favicon_io/favicon-16x16.png">
+    <link rel="manifest" href="media/favicon_io/site.webmanifest">
 </head>
 
 <body>
-    <!-- Hamburger Button -->
+    <!-- Mobile Hamburger Button -->
     <div class="hamburger-btn" id="hamburger-btn">
         <span></span><span></span><span></span>
     </div>
 
-    <!-- Full Screen Menu Overlay -->
+    <!-- Mobile Full Screen Menu Overlay -->
     <nav class="fullscreen-menu" id="fullscreen-menu">
         <div class="menu-inner-container">
-            <!-- ENG / ITA Language Switcher (Positioned above nav items) -->
             <div class="lang-switcher">
-                <span id="lang-btn-en" class="lang-btn">ENG</span> / <span id="lang-btn-it" class="lang-btn">ITA</span>
+                <span id="lang-btn-en-mobile" class="lang-btn">ENG</span> / <span id="lang-btn-it-mobile" class="lang-btn">ITA</span>
             </div>
 
             <ul class="fullscreen-links">
-                <li><a href="https://oldfriend.superbexperience.com/reserve/experience" target="_blank" data-i18n="navBooking">Booking</a></li>
+                <li><a href="https://www.google.com/maps/reserve/v/dine/c/WnwBaNWBeN8?hl=it-IT" target="_blank" data-i18n="navBooking">Booking</a></li>
                 <li><a href="#" class="nav-link" data-target="accordion-menu" data-i18n="navMenu">Menu</a></li>
                 <li><a href="#" class="nav-link" data-target="accordion-who" data-i18n="navWho">Who we are</a></li>
                 <li><a href="#" class="nav-link" data-target="accordion-contact" data-i18n="navContact">Contact</a></li>
@@ -72,31 +71,46 @@
         </div>
     </nav>
 
-    <!-- Fixed Logo Container -->
+    <!-- Fixed Header Container -->
     <div class="fixed-logo-container">
+        <!-- Top-Right Fixed Language Switcher (Desktop) -->
+        <div class="fixed-desktop-lang">
+            <span id="lang-btn-en-fixed" class="lang-btn">ENG</span> / <span id="lang-btn-it-fixed" class="lang-btn">ITA</span>
+        </div>
+
         <h1 class="logo">Old Friend</h1>
+
+        <!-- Desktop Horizontal Navigation -->
+        <nav class="desktop-nav">
+            <ul class="desktop-nav-links">
+                <li><a href="https://www.google.com/maps/reserve/v/dine/c/WnwBaNWBeN8?hl=it-IT" target="_blank" data-i18n="navBooking">Booking</a></li>
+                <li><a href="#" class="nav-link" data-target="accordion-menu" data-i18n="navMenu">Menu</a></li>
+                <li><a href="#" class="nav-link" data-target="accordion-who" data-i18n="navWho">Who we are</a></li>
+                <li><a href="#" class="nav-link" data-target="accordion-contact" data-i18n="navContact">Contact</a></li>
+            </ul>
+        </nav>
     </div>
 
-    <!-- Full-Screen Video Hero -->
+    <!-- Video Hero Header -->
     <header class="hero-header">
-        <video autoplay muted loop playsinline class="hero-video">
-            <source src="media/videos/image 20.mp4" type="video/mp4">
-        </video>
-        
-        <!-- Michelin Badge Wrapper for Sticky Logic -->
-        <div class="michelin-wrapper" id="michelin-wrapper">
-            <div class="michelin-badge" id="michelin-badge">
-                <img src="media/logos/michelin2026.png" alt="Michelin Guide 2026" class="michelin-img">
+        <div class="hero-video-wrapper">
+            <video id="hero-video" autoplay muted loop playsinline preload="metadata" class="hero-video">
+                <source id="hero-video-source" src="media/videos/image 20 (no-audio) long.mp4" type="video/mp4">
+            </video>
+            
+            <div class="michelin-wrapper" id="michelin-wrapper">
+                <div class="michelin-badge" id="michelin-badge">
+                    <img src="media/logos/michelin2026.png" alt="Michelin Guide 2026" class="michelin-img">
+                </div>
             </div>
         </div>
     </header>
 
     <!-- Main Content Wrapper -->
     <div class="scroll-content">
-        
         <main class="menu-container">
             <!-- Standalone Booking Section (Crossfading Images) -->
-            <a href="https://oldfriend.superbexperience.com/reserve/experience" target="_blank" class="booking-link">
+            <a href="https://www.google.com/maps/reserve/v/dine/c/WnwBaNWBeN8?hl=it-IT" target="_blank" class="booking-link">
                 <div class="booking-crossfade">
                     <img src="media/photos/image 05.jpeg" class="cf-base-img" style="width: 100%; display: block; height: auto;" alt="Booking">
                     
@@ -116,9 +130,9 @@
                 <h2 class="menu-title" id="accordion-menu" data-i18n="accordionMenu">Menu</h2>
                 <div class="menu-content">
                     <div id="dynamic-menu-container">
-                         <span data-i18n="loadingMenu">Loading today's menus...</span>
-        </div>               
-     </div>
+                        <span data-i18n="loadingMenu">Loading today's menus...</span>
+                    </div>               
+                </div>
             </section>
 
             <!-- Menu Modal -->
@@ -132,7 +146,7 @@
                 <div class="menu-content">
                     <p data-i18n="whoText">A culinary concept shaped by Chef Dario Torabi's relentless research. An authentic, unadorned experience rooted in an obsession with exceptional ingredients, strict seasonality, and honoring every single element in its purest, most profound expression.</p>
                     
-                    <img src="media/photos/image 07.jpeg" alt="Inside Old Friend" style="width: 100%; height: auto; margin-top: 25px; display: block;">
+                    <img src="media/photos/image 20.jpeg" alt="Inside Old Friend" style="width: 100%; height: auto; margin-top: 25px; display: block;">
                 </div>
             </section>
 
@@ -146,16 +160,19 @@
                     </p>
                     <p style="line-height: 1.6;">
                         <strong data-i18n="contactHeader">Contact</strong><br>
-                        <a href="mailto:info@oldfriendcagliari.com" style="color: #1a1a1a; text-decoration: none;">info@oldfriendcagliari.com</a><br>
-                        <a href="tel:+390000000000" style="color: #1a1a1a; text-decoration: none;">+39 000 000 0000</a>
+                        <a href="mailto:oldfriendbistrot@gmail.com" style="color: #1a1a1a; text-decoration: none;">oldfriendbistrot@gmail.com</a><br>
+                        <a href="tel:+390704647988" style="color: #1a1a1a; text-decoration: none;">+39 070 4647988</a>
                     </p>
                     <p style="line-height: 1.6; margin-bottom: 0;">
                         <strong data-i18n="contactReservations">Reservations</strong><br>
-                        <a href="https://oldfriend.superbexperience.com/reserve/experience" target="_blank" style="color: #8a1c1c; text-decoration: underline; font-weight: 500;" data-i18n="contactBookTable">Book a Table</a>
+                        <a href="https://www.google.com/maps/reserve/v/dine/c/WnwBaNWBeN8?hl=it-IT" target="_blank" style="color: #8a1c1c; text-decoration: underline; font-weight: 500;" data-i18n="contactBookTable">Book a Table</a>
+                    </p>
+                     <p style="line-height: 1.6;">
+                        <strong>Instagram</strong><br>
+                        <a href="https://www.instagram.com/oldfriendcagliari/" target="_blank" style="color: #1a1a1a; text-decoration: underline;">@oldfriendcagliari</a>
                     </p>
                 </div>
             </section>
-
         </main>
 
         <!-- Footer -->
@@ -174,7 +191,6 @@
                 </a>
             </div>
         </footer>
-        
     </div>
 
     <script src="script.js"></script>
