@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Old Friend | Admin Dashboard</title>
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        :root {
+            --primary: #8a1c1c;
+            --success: #28a745;
+            --danger: #8a1c1c;
+            --dark: #1a1a1a;
+            --bg: #f4f1eb;
+        }
+        
+        html, body {
+            width: 100% !important;
+            min-width: 100% !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            overflow-x: hidden !important;
+            background-color: var(--bg);
+            color: var(--dark);
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        .admin-container {
+            width: 100%;
+            min-height: 100vh;
+            background: #f4f1eb;
+            padding: 12px;
+            box-sizing: border-box;
+        }
+
+        @media (min-width: 768px) {
+            html, body {
+                padding: 30px 10px !important;
+            }
+            .admin-container {
+                max-width: 700px;
+                min-height: auto;
+                margin: 0 auto;
+                border-radius: 8px;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+                padding: 25px;
+            }
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #1a1a1a;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+        .admin-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.4rem;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .card {
+            background: #ffffff;
+            border: 1px solid #dcd6cd;
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+        }
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            font-family: 'Cinzel', serif;
+            font-weight: 600;
+            font-size: 1.1rem;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 8px;
+        }
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 500;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #555;
+        }
+        input[type="text"], input[type="password"], input[type="number"], textarea {
+            width: 100%;
+            padding: 12px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 16px;
+            background: #fdfdfd;
+            font-family: sans-serif;
+            margin-bottom: 10px;
+        }
+        textarea { resize: vertical; height: 75px; }
+        
+        button {
+            background-color: #1a1a1a;
+            color: white;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: 'Cinzel', serif;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            width: 100%;
+            transition: background 0.2s;
+            text-transform: uppercase;
+            box-sizing: border-box;
+        }
+        button:hover { background-color: #8a1c1c; }
+        button:active { opacity: 0.8; }
+        
+        .btn-salva { background-color: #28a745; width: auto; padding: 10px 14px; font-size: 0.8rem; margin-top: 0; }
+        .btn-salva:hover { background-color: #218838; }
+        .btn-indietro { background-color: #6c757d; width: auto; padding: 10px 14px; font-size: 0.8rem; margin-bottom: 15px; }
+        .logout-btn { background-color: #8a1c1c; width: auto; padding: 8px 12px; font-size: 0.8rem; margin-top: 0; }
+        
+        .hidden { display: none; }
+        .error { color: #8a1c1c; font-size: 0.9rem; margin-top: 10px; text-align: center; }
+        
+        .allergeni-box {
+            font-size: 0.8rem;
+            background: #f9f8f6;
+            padding: 10px;
+            border-radius: 6px;
+            margin-top: 8px;
+            border: 1px solid #e5e0d8;
+        }
+        .allergeni-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px;
+            margin-top: 6px;
+        }
+        .allergeni-grid label {
+            display: flex;
+            align-items: center;
+            font-weight: normal;
+            font-size: 0.85rem;
+            text-transform: none;
+            letter-spacing: 0;
+            color: #333;
+            cursor: pointer;
+            margin-bottom: 0;
+        }
+        .allergeni-grid input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            margin-right: 8px;
+            accent-color: #8a1c1c;
+        }
+        .section-title {
+            background: #e9e5de;
+            padding: 10px;
+            font-family: 'Cinzel', serif;
+            font-weight: 600;
+            border-radius: 6px;
+            margin: 15px 0 10px 0;
+            color: #1a1a1a;
+            font-size: 0.95rem;
+        }
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            background: #fdfdfd;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+        .checkbox-container input {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            accent-color: #8a1c1c;
+        }
+    </style>
+</head>
+<body>
+
+  <div class="admin-container">
+    <!-- SEZIONE LOGIN -->
+    <div id="login-section">
+      <h2 style="font-family: 'Cinzel', serif; text-align: center; margin-top: 30px; font-size: 1.6rem;">Old Friend Admin</h2>
+      <p style="text-align: center; color: #666; font-size: 0.9rem; margin-bottom: 25px;">Inserisci le credenziali per gestire i menu.</p>
+      
+      <div class="card" style="max-width: 400px; margin: 0 auto;">
+        <div class="form-group">
+          <label>Nome Utente</label>
+          <input type="text" id="username" placeholder="Username" autocapitalize="none">
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" id="password" placeholder="Password">
+        </div>
+        <button onclick="handleLogin()">Accedi</button>
+        <div id="login-error" class="error"></div>
+      </div>
+    </div>
+
+    <!-- DASHBOARD IMPOSTAZIONI -->
+    <div id="dashboard-section" class="hidden">
+      <div class="admin-header">
+        <h2 class="admin-title">Gestione Menu</h2>
+        <button class="logout-btn" onclick="handleLogout()">Esci</button>
+      </div>
+      <p style="font-size: 0.9rem; color: #666; margin-bottom: 15px;">Modifica prezzi, descrizioni, visibilità o entra nei singoli menu.</p>
+      <div id="settings-container"></div>
+    </div>
+
+    <!-- MODIFICA ALLA CARTA -->
+    <div id="allacarta-section" class="hidden">
+      <button class="btn-indietro" onclick="tornaAllaHome()">← Indietro</button>
+      <h2 class="admin-title" style="margin-bottom: 15px;">Alla Carta</h2>
+      <div id="allacarta-container"></div>
+      <button onclick="aggiungiPiattoAllaCarta()" style="background-color: #8a1c1c; margin-top: 15px;">+ Aggiungi Piatto</button>
+    </div>
+
+    <!-- MODIFICA DEGUSTAZIONE -->
+    <div id="degustazione-section" class="hidden">
+      <button class="btn-indietro" onclick="tornaAllaHome()">← Indietro</button>
+      <h2 id="deg-title-heading" class="admin-title" style="margin-bottom: 15px;">Modifica Degustazione</h2>
+      <div id="degustazione-container"></div>
+    </div>
+  </div>
+
+  <script>
+    // INSERISCI QUI IL TUO URL DEL WEB APP DI APPS SCRIPT
+    const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxksCI2sq5y_mwN94K7ulCeXjFXc1zalTi6X17flJR2X1rSk_zQJDBxgFLV8_oXFBurYA/exec";
+
+    var currentActiveTab = '';
+
+    window.onload = function() {
+      if (localStorage.getItem('oldfriend_admin_logged') === 'true') {
+        document.getElementById('login-section').classList.add('hidden');
+        document.getElementById('dashboard-section').classList.remove('hidden');
+        caricaImpostazioni();
+      }
+    };
+
+    // Ascoltatore per il tasto Invio nei campi di login
+    document.addEventListener("DOMContentLoaded", function() {
+      ['username', 'password'].forEach(function(id) {
+        document.getElementById(id).addEventListener('keypress', function(e) {
+          if (e.key === 'Enter') {
+            handleLogin();
+          }
+        });
+      });
+    });
+
+    function handleLogin() {
+      var user = document.getElementById('username').value;
+      var pass = document.getElementById('password').value;
+      var errEl = document.getElementById('login-error');
+      errEl.innerText = "Verifica in corso...";
+
+      fetch(APPS_SCRIPT_URL + "?action=login&user=" + encodeURIComponent(user) + "&pass=" + encodeURIComponent(pass))
+        .then(res => res.json())
+        .then(res => {
+          if (res.success) {
+            localStorage.setItem('oldfriend_admin_logged', 'true');
+            document.getElementById('login-section').classList.add('hidden');
+            document.getElementById('dashboard-section').classList.remove('hidden');
+            caricaImpostazioni();
+          } else {
+            errEl.innerText = res.message || 'Credenziali non valide.';
+          }
+        })
+        .catch(err => {
+          errEl.innerText = 'Errore di connessione al server.';
+        });
+    }
+
+    function handleLogout() {
+      localStorage.removeItem('oldfriend_admin_logged');
+      location.reload();
+    }
+
+    function caricaImpostazioni() {
+      fetch(APPS_SCRIPT_URL + "?action=getSettings")
+        .then(res => res.json())
+        .then(items => {
+          var container = document.getElementById('settings-container');
+          container.innerHTML = '';
+          
+          items.forEach(function(item) {
+            var card = document.createElement('div');
+            card.className = 'card';
+            var isDegustazione = item.tipoMenu === 'Degustazione';
+            
+            var dettagliDegHTML = isDegustazione ? `
+              <div class="form-group"><label>Nome del Menu:</label><input type="text" id="set-nome-${item.row}" value="${item.nome}"></div>
+              <div class="form-group"><label>Descrizione:</label><textarea id="set-desc-${item.row}">${item.descrizione}</textarea></div>
+            ` : `<input type="hidden" id="set-nome-${item.row}" value="${item.nome}"><input type="hidden" id="set-desc-${item.row}" value="${item.descrizione}">`;
+
+            card.innerHTML = `
+              <div class="card-header">
+                <span>${item.tabName}</span>
+                <button class="btn-salva" onclick="salvaImpostazione(${item.row}, '${item.tabName}')">Salva</button>
+              </div>
+              ${dettagliDegHTML}
+              <div class="form-group">
+                <label>Prezzo (€):</label>
+                <input type="number" step="1" id="set-costo-${item.row}" value="${item.costo}" ${!isDegustazione ? 'disabled style="background:#e9ecef;"' : ''}>
+              </div>
+              <div class="form-group">
+                <div class="checkbox-container">
+                  <input type="checkbox" id="set-visibile-${item.row}" ${item.visibile ? 'checked' : ''}>
+                  <label for="set-visibile-${item.row}" style="margin:0;">Visibile sul sito web</label>
+                </div>
+              </div>
+              <div style="margin-top: 15px;">
+                <button onclick="apriEditorMenu('${item.tabName}', '${item.tipoMenu}')" style="background-color: #1a1a1a;">Modifica Piatti (${item.tabName}) →</button>
+              </div>
+            `;
+            container.appendChild(card);
+          });
+        });
+    }
+
+    function salvaImpostazione(row, tabName) {
+      var nome = document.getElementById('set-nome-' + row).value;
+      var descrizione = document.getElementById('set-desc-' + row).value;
+      var costoInput = document.getElementById('set-costo-' + row);
+      var costo = costoInput.disabled ? '' : costoInput.value;
+      var visibile = document.getElementById('set-visibile-' + row).checked;
+
+      fetch(APPS_SCRIPT_URL, {
+        method: 'POST',
+        body: JSON.stringify({ action: 'updateSetting', row: row, nome: nome, descrizione: descrizione, costo: costo, visibile: visibile })
+      }).then(() => alert('Impostazioni aggiornate con successo!'));
+    }
+
+    function apriEditorMenu(tabName, tipoMenu) {
+      currentActiveTab = tabName;
+      document.getElementById('dashboard-section').classList.add('hidden');
+      if (tabName === 'Alla Carta') {
+        document.getElementById('allacarta-section').classList.remove('hidden');
+        caricaAllaCarta();
+      } else {
+        document.getElementById('deg-title-heading').innerText = 'Piatti: ' + tabName;
+        document.getElementById('degustazione-section').classList.remove('hidden');
+        caricaDegustazione(tabName);
+      }
+    }
+
+    function tornaAllaHome() {
+      document.getElementById('allacarta-section').classList.add('hidden');
+      document.getElementById('degustazione-section').classList.add('hidden');
+      document.getElementById('dashboard-section').classList.remove('hidden');
+      caricaImpostazioni();
+    }
+
+    function caricaAllaCarta() {
+      fetch(APPS_SCRIPT_URL + "?action=getAllaCarta")
+        .then(res => res.json())
+        .then(items => {
+          var container = document.getElementById('allacarta-container');
+          container.innerHTML = '';
+          items.filter(item => item.row >= 2).forEach(function(item) {
+            var parsed = parseDishAndAllergens(item.name);
+            var card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `
+              <div class="form-group"><label>Nome Piatto:</label><input type="text" value="${parsed.text}" id="ac-name-${item.row}"></div>
+              <div class="form-group"><label>Prezzo (€):</label><input type="number" step="0.5" value="${item.price}" id="ac-price-${item.row}"></div>
+              <div class="form-group">
+                <div class="allergeni-box">
+                  <span style="font-weight:bold; display:block; margin-bottom:4px;">Allergeni:</span>
+                  <div class="allergeni-grid">${generaCheckboxAllergeni(item.row, 'ac', parsed.allergens)}</div>
+                </div>
+              </div>
+              <div style="text-align: right; margin-top: 10px;">
+                <button class="btn-salva" onclick="salvaPiattoAllaCarta(${item.row})">Salva Piatto</button>
+              </div>
+            `;
+            container.appendChild(card);
+          });
+        });
+    }
+
+    function salvaPiattoAllaCarta(row) {
+      if (row < 2) { alert("Errore: Impossibile modificare l'intestazione!"); return; }
+      var nameText = document.getElementById('ac-name-' + row).value;
+      var price = document.getElementById('ac-price-' + row).value;
+      var allergeni = [];
+      for (var i = 1; i <= 14; i++) {
+        var cb = document.getElementById('al-' + row + '-ac-' + i);
+        if (cb && cb.checked) allergeni.push(i);
+      }
+      var finalName = nameText.trim();
+      if (allergeni.length > 0) finalName += ' ^' + allergeni.join(',');
+
+      fetch(APPS_SCRIPT_URL, {
+        method: 'POST',
+        body: JSON.stringify({ action: 'saveAllaCarta', row: row, name: finalName, price: price })
+      }).then(() => alert('Piatto aggiornato!'));
+    }
+
+    function aggiungiPiattoAllaCarta() {
+      var name = prompt("Nome del nuovo piatto:");
+      if (!name) return;
+      var price = prompt("Prezzo (€):");
+      if (!price) return;
+      fetch(APPS_SCRIPT_URL, {
+        method: 'POST',
+        body: JSON.stringify({ action: 'saveAllaCarta', row: null, name: name, price: price })
+      }).then(() => { alert('Piatto aggiunto!'); caricaAllaCarta(); });
+    }
+
+    function caricaDegustazione(tabName) {
+      fetch(APPS_SCRIPT_URL + "?action=getDegustazione&tab=" + encodeURIComponent(tabName))
+        .then(res => res.json())
+        .then(data => {
+          var container = document.getElementById('degustazione-container');
+          container.innerHTML = '';
+          
+          var op1Filtrata = data.opzione1.filter(item => item.row >= 2);
+          var op2Filtrata = data.opzione2.filter(item => item.row >= 2);
+
+          var renderBlocco = (title, opzioni, colNum) => {
+            var div = document.createElement('div');
+            div.innerHTML = `<div class="section-title">${title}</div>`;
+            opzioni.forEach((item, idx) => {
+              var parsed = parseDishAndAllergens(item.text);
+              div.appendChild(creaCardPiattoDeg(tabName, idx + 1, item.row, colNum, parsed.text, parsed.allergens));
+            });
+            div.innerHTML += `<button onclick="aggiungiElementoDeg('${tabName}', ${colNum})" style="background-color: #8a1c1c; margin: 10px 0 15px 0;">+ Aggiungi a ${title}</button>`;
+            container.appendChild(div);
+          };
+
+          renderBlocco("Opzione 1", op1Filtrata, 1);
+          renderBlocco("Opzione 2 (Alternativa)", op2Filtrata, 2);
+        });
+    }
+
+    function creaCardPiattoDeg(tabName, indexNum, rowId, colNum, textVal, allergeniList) {
+      var card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = `
+        <div style="font-weight:600; margin-bottom:8px; color:#555; font-size:0.85rem;">Portata ${indexNum}</div>
+        <div class="form-group" style="margin-bottom:10px;">
+          <input type="text" value="${textVal}" id="deg-text-${rowId}-${colNum}">
+          <div class="allergeni-box">
+            <span style="font-weight:bold; display:block; margin-bottom:4px;">Allergeni:</span>
+            <div class="allergeni-grid">${generaCheckboxAllergeni(rowId, colNum, allergeniList)}</div>
+          </div>
+        </div>
+        <div style="text-align: right;">
+          <button class="btn-salva" onclick="salvaSingoloDeg('${tabName}', ${rowId}, ${colNum})">Salva Piatto</button>
+        </div>
+      `;
+      return card;
+    }
+
+    function parseDishAndAllergens(str) {
+      var allergens = [];
+      if (!str) return { text: '', allergens: [] };
+      var match = str.match(/\^\{?([0-9,\s]+)\}?$/);
+      var text = str;
+      if (match) {
+        text = str.replace(match[0], '').trim();
+        allergens = match[1].split(',').map(s => s.trim());
+      }
+      return { text: text.trim(), allergens: allergens };
+    }
+
+    function generaCheckboxAllergeni(rowId, prefix, selectedList) {
+      var allergeniList = [
+        {id: '1', name: '1. Glutine'}, {id: '2', name: '2. Crostacei'}, {id: '3', name: '3. Uova'},
+        {id: '4', name: '4. Pesce'}, {id: '5', name: '5. Arachidi'}, {id: '6', name: '6. Soia'},
+        {id: '7', name: '7. Latte'}, {id: '8', name: '8. Frutta guscio'}, {id: '9', name: '9. Sedano'},
+        {id: '10', name: '10. Senape'}, {id: '11', name: '11. Sesamo'}, {id: '12', name: '12. Solfiti'},
+        {id: '13', name: '13. Lupini'}, {id: '14', name: '14. Molluschi'}
+      ];
+      var html = '';
+      allergeniList.forEach(function(al) {
+        var isChecked = selectedList.includes(al.id) ? 'checked' : '';
+        html += `<label><input type="checkbox" value="${al.id}" id="al-${rowId}-${prefix}-${al.id}" ${isChecked}>${al.name}</label>`;
+      });
+      return html;
+    }
+
+    function salvaSingoloDeg(tabName, row, col) {
+      if (row < 2) { alert("Errore: Impossibile modificare l'intestazione!"); return; }
+      var dishText = document.getElementById('deg-text-' + row + '-' + col).value;
+      var allergeni = [];
+      for (var i = 1; i <= 14; i++) {
+        var cb = document.getElementById('al-' + row + '-' + col + '-' + i);
+        if (cb && cb.checked) allergeni.push(i);
+      }
+      fetch(APPS_SCRIPT_URL, {
+        method: 'POST',
+        body: JSON.stringify({ action: 'saveDegustazione', tab: tabName, row: row, col: col, text: dishText, allergeni: allergeni })
+      }).then(() => alert('Piatto salvato con successo!'));
+    }
+
+    function aggiungiElementoDeg(tabName, colNum) {
+      var dishText = prompt("Nome del nuovo piatto per l'Opzione " + colNum + ":");
+      if (!dishText) return;
+      fetch(APPS_SCRIPT_URL, {
+        method: 'POST',
+        body: JSON.stringify({ action: 'saveDegustazione', tab: tabName, row: 9999, col: colNum, text: dishText, allergeni: [] })
+      }).then(() => { alert('Nuovo piatto aggiunto!'); caricaDegustazione(tabName); });
+    }
+  </script>
+</body>
+</html>

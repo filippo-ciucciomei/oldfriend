@@ -143,7 +143,7 @@ body.modal-open {
     color: #8a1c1c !important;
 }
 
-.michelin-wrapper {
+/* .michelin-wrapper {
     position: absolute;
     bottom: 30px;
     width: 100%;
@@ -155,6 +155,73 @@ body.modal-open {
     display: flex;
     justify-content: center;
     width: 100%;
+} */
+
+/* --- HERO BADGES (MICHELIN + GAMBERO ROSSO) --- */
+.michelin-wrapper {
+    position: absolute;
+    bottom: 30px;
+    width: 100%;
+    height: 24px;
+    z-index: 1; 
+}
+
+.michelin-badge {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+}
+
+.michelin-img {
+    height: 12px;
+    width: auto;
+    opacity: 0.9;
+    display: block;
+}
+
+.gambero-img {
+    height: 35px; /* Leggermente più alto del Michelin per pareggiare l'altezza ottica */
+    width: auto;
+    opacity: 0.9;
+    display: block;
+}
+
+/* Sottile divisorio minimale tra i due premi */
+.badge-separator {
+    display: inline-block;
+    width: 1px;
+    height: 10px;
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
+/* --- FOOTER BADGES --- */
+.footer-michelin {
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+}
+
+.michelin-img-small {
+    height: 9px;
+    width: auto;
+    opacity: 0.7;
+    display: block;
+}
+
+.gambero-img-small {
+    height: 29px;
+    width: auto;
+    opacity: 0.7;
+    display: block;
+}
+
+.footer-badge-separator {
+    display: inline-block;
+    width: 1px;
+    height: 8px;
+    background-color: rgba(26, 26, 26, 0.3);
 }
 
 .michelin-img {
